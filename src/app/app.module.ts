@@ -6,6 +6,8 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { AddReminder } from '../pages/addReminder/addReminder';
+import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { AddReminder } from '../pages/addReminder/addReminder';
     AboutPage,
     HomePage,
     TabsPage,
-    AddReminder
+    AddReminder,
+    LoginPage,
+    RegisterPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -24,7 +28,9 @@ import { AddReminder } from '../pages/addReminder/addReminder';
     AboutPage,
     HomePage,
     TabsPage,
-    AddReminder
+    AddReminder,
+    LoginPage,
+    RegisterPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
