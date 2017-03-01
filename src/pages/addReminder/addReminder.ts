@@ -3,13 +3,16 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 @Component({
-  selector: 'page-contact',
-  templateUrl: 'contact.html'
+  selector: 'page-add-reminder',
+  templateUrl: 'addReminder.html'
 })
-export class ContactPage {
+export class AddReminder {
 
   constructor(public navCtrl: NavController) {
 
   }
 
+  saveReminder() {
+    console.log('Reminder saved!');
+  }
 }

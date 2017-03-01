@@ -1,11 +1,19 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      About
+      Guides
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item *ngFor="let guide of guides">
+      <ion-avatar item-left>
+        <img src="http://placehold.it/350x150">
+      </ion-avatar>
+      <h2>{{guide.title}}</h2>
+      <p>{{guide.computedText}}</p>
+    </ion-item>
+  </ion-list>
 </ion-content>
