@@ -2,7 +2,7 @@
   <ion-navbar align-title="center">
     <ion-title>New Reminder</ion-title>
     <ion-buttons end>
-      <button ion-button outline="true" (click)="addReminder()">
+      <button ion-button outline="true" (click)="saveReminder()">
         <ion-icon name="md-checkmark"></ion-icon>
       </button>
     </ion-buttons>
@@ -10,5 +10,34 @@
 </ion-header>
 
 <ion-content padding>
-  Hi!
+  <ion-item>
+    <ion-label>Category</ion-label>
+    <ion-select [(ngModel)]="reminder.category">
+      <ion-option value="Inspirational" selected="true">Inspirational</ion-option>
+      <ion-option value="Motivational">Motivational</ion-option>
+      <ion-option value="Thoughtful">Thoughtful</ion-option>
+      <ion-option value="Persuasive">Persuasive</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Date</ion-label>
+    <ion-datetime displayFormat="MMMM DD, YYYY" pickerFormat="MM DD YYYY" [(ngModel)]="reminder.date"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Time</ion-label>
+    <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="reminder.time"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Social Media Type</ion-label>
+    <ion-select [(ngModel)]="reminder.type">
+      <ion-option value="Facebook" selected="true">Facebook</ion-option>
+      <ion-option value="Twitter">Twitter</ion-option>
+      <ion-option value="Google+">Google+</ion-option>
+      <ion-option value="MySpace">MySpace</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+  <ion-label floating>Notes</ion-label>
+  <ion-textarea [(ngModel)]="reminder.notes"></ion-textarea>
+</ion-item>
 </ion-content>
