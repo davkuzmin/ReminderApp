@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { HomePage } from '../home/home'
+import { RemindersPage } from '../reminders/reminders';
+import { TabsPage } from '../tabs/tabs';
 
 import { NavController } from 'ionic-angular';
 
@@ -19,7 +20,7 @@ export class RegisterPage {
 
   register() {
     firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(() => {
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.push(TabsPage, {}, {animate: false});
     }).catch(function(error) {
       console.log(error.message);
     });

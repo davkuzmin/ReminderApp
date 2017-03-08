@@ -1,31 +1,32 @@
 import { Component } from '@angular/core';
 import { RegisterPage } from '../register/register';
-import { HomePage } from '../home/home';
+import { TabsPage } from '../tabs/tabs';
 
 import { NavController, ToastController } from 'ionic-angular';
 
 import firebase from 'firebase';
+import { FireAuthService } from '../../providers/fire-auth-service'
 
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
+  providers: [FireAuthService]
 })
 export class LoginPage {
   public email;
   public password;
 
-  constructor(public navCtrl: NavController, private toastCtrl: ToastController) {
-
-  }
+  constructor(public navCtrl: NavController,
+    private toastCtrl: ToastController,
+    private auth: FireAuthService) { }
 
   login() {
     let self = this;
-
-    firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
-      self.navCtrl.setRoot(HomePage);
+    
+    this.auth.login(this.email, this.password).then(() => {
+      this.navCtrl.setRoot(TabsPage, {}, {animate: false});
     }).catch(function(error) {
-      console.log(error.message);
-      self.invalidLogin();
+      this.invalidLogin();
     });
   }
 

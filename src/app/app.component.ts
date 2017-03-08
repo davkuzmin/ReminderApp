@@ -2,18 +2,17 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
-
-import { TabsPage } from '../pages/tabs/tabs';
-import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 
 import firebase from 'firebase';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
 })
 export class MyApp {
-  public rootPage = TabsPage; //LoginPage
+  //@ViewChild('content') nav: Nav;
+
+  public rootPage = LoginPage;
 
   constructor(platform: Platform) {
     firebase.initializeApp({
@@ -22,16 +21,6 @@ export class MyApp {
       databaseURL: "https://reminderapp-bb5a7.firebaseio.com",
       storageBucket: "reminderapp-bb5a7.appspot.com",
       messagingSenderId: "554293570088"
-    });
-
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      if (!user) {
-        this.rootPage = LoginPage as any;
-        unsubscribe();
-      } else {
-        this.rootPage = HomePage as any;
-        unsubscribe();
-      }
     });
 
     platform.ready().then(() => {

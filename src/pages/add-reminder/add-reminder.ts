@@ -6,7 +6,7 @@ import firebase from 'firebase';
 
 @Component({
   selector: 'page-add-reminder',
-  templateUrl: 'addReminder.html'
+  templateUrl: 'add-reminder.html'
 })
 export class AddReminder {
   public reminder = {

@@ -13,10 +13,10 @@
   <ion-list>
     <ion-item *ngFor="let reminder of reminders">
       <ion-avatar item-left>
-        <img src="http://placehold.it/350x150">
+        <ion-icon [name]="getSocialMediaIcon(reminder.type)"></ion-icon>
       </ion-avatar>
       <h2>{{reminder.category}}</h2>
-      <h3>{{reminder.date}} {{reminder.time}}</h3>
+      <h3>{{reminder.date | date: 'MMMM d, yyyy h:mm a'}}</h3>
       <p>{{reminder.notes}}</p>
     </ion-item>
   </ion-list>
