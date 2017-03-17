@@ -9,6 +9,7 @@ import { ViewGuide } from '../pages/view-guide/view-guide';
 import { AddReminder } from '../pages/add-reminder/add-reminder';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
+import { ReminderView } from '../pages/reminder-view/reminder-view';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { RegisterPage } from '../pages/register/register';
     AddReminder,
     LoginPage,
     RegisterPage,
-    ViewGuide
+    ViewGuide,
+    ReminderView
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -33,7 +35,8 @@ import { RegisterPage } from '../pages/register/register';
     AddReminder,
     LoginPage,
     RegisterPage,
-    ViewGuide
+    ViewGuide,
+    ReminderView
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

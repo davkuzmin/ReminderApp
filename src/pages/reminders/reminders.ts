@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AddReminder } from '../add-reminder/add-reminder'
 import { NavController, AlertController } from 'ionic-angular';
 
+import {ReminderView} from '../reminder-view/reminder-view';
+
 import { LoginPage } from '../login/login'
 
 import Utils from '../../app/utils';
@@ -42,4 +44,18 @@ export class RemindersPage {
   getSocialMediaIcon(type: string) {
     return Utils.getSocialMediaIcon(type);
   }
+
+
+
+  viewReminder(reminder) {
+    this.navCtrl.push(ReminderView, {
+      reminder:reminder
+    })
+  }
+
+
+
+
+
+
 }
