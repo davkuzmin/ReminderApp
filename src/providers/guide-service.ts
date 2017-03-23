@@ -2,29 +2,23 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the GuideService provider.
+import { Storage } from '@ionic/storage';
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class GuideService {
-  data: any;
 
-  constructor(public http: Http) { }
+  constructor(public http: Http, private storage: Storage) {
+    storage.ready().then(() => {
+      //TODO store guides in Storage
+    });
+  }
 
-  load() {
-    if (this.data) {
-      return Promise.resolve(this.data);
-    }
-
+  public fetch(): Promise<any> {
     return new Promise(resolve => {
       this.http.get('https://baconipsum.com/api/?type=meat-and-filler')
         .map(res => res.json())
         .subscribe(data => {
-          this.data = data;
-          resolve(this.data);
+          resolve(data);
         });
     });
   }

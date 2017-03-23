@@ -1,4 +1,5 @@
 import { NgModule, ErrorHandler } from '@angular/core';
+import { IonicStorageModule } from '@ionic/storage'
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { GuidesPage } from '../pages/guides/guides';
@@ -24,7 +25,8 @@ import { ReminderView } from '../pages/reminder-view/reminder-view';
     ReminderView
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -9,14 +9,18 @@ export default class Utils {
       return res;
     }
 
-    static getSocialMediaIcon(type: string) {
-      switch(type.toLowerCase()) {
-        case 'google+':
-          return 'logo-googleplus';
-        case 'twitter':
-          return 'logo-twitter';
-        case 'facebook':
-          return 'logo-facebook';
+    static getSocialMediaIcon(type: any) {
+      if (type instanceof Array) { //multiple types
+        return 'star'
+      } else {
+        switch(type.toLowerCase()) {
+          case 'google+':
+            return 'logo-googleplus';
+          case 'twitter':
+            return 'logo-twitter';
+          case 'facebook':
+            return 'logo-facebook';
+        }
       }
     }
 }

@@ -30,7 +30,7 @@ export class LoginPage {
         this.navCtrl.setRoot(TabsPage, {}, {animate: false});
       });
     }).catch(function(error) {
-      this.invalidLogin();
+      self.invalidLogin(error);
     });
   }
 
@@ -38,10 +38,10 @@ export class LoginPage {
     this.navCtrl.push(RegisterPage);
   }
 
-  invalidLogin() {
+  invalidLogin(e) {
     let toast = this.toastCtrl.create({
-      message: 'Invalid Credentials',
-      duration: 2500,
+      message: e.message,
+      duration: 5000,
       position: 'bottom'
     });
 

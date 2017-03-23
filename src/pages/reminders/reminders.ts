@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { AddReminder } from '../add-reminder/add-reminder'
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController  } from 'ionic-angular';
 
-import {ReminderView} from '../reminder-view/reminder-view';
-
-import { LoginPage } from '../login/login'
+import { ReminderView } from '../reminder-view/reminder-view';
+import { AddReminder } from '../add-reminder/add-reminder';
+import { LoginPage } from '../login/login';
 
 import Utils from '../../app/utils';
 
@@ -23,7 +22,7 @@ export class RemindersPage {
     private auth: FireAuthService,
     private alertCtrl: AlertController) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.updateReminders();
   }
 
@@ -45,17 +44,9 @@ export class RemindersPage {
     return Utils.getSocialMediaIcon(type);
   }
 
-
-
   viewReminder(reminder) {
     this.navCtrl.push(ReminderView, {
       reminder:reminder
-    })
+    });
   }
-
-
-
-
-
-
 }

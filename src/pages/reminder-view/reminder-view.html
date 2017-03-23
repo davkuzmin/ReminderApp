@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content padding>
-<ion-card>
+<ion-card (swipe)="onSwipe($event)">
 <ion-card-content>
 
 {{reminder.category}}
@@ -19,10 +19,3 @@
 </ion-card-content>
 </ion-card>
 </ion-content>
-
-
-
-
-
-
-

@@ -13,12 +13,8 @@ export class GuidesPage {
   public guides: Array<any> = [];
 
   constructor(public navCtrl: NavController, public guideService: GuideService) {
-    this.loadGuides();
-  }
-
-  loadGuides() {
-    return this.guideService.load().then((data) => {
-      this.guides = data.map((guide) => {
+    guideService.fetch().then((guides) => {
+      this.guides = guides.map((guide) => {
         return {
           title: guide.split(' ')[0],
           abbreviatedContent: guide.substring(0, 20) + '...',
