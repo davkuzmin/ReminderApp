@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController  } from 'ionic-angular';
 
+import { LocalNotifications } from '@ionic-native/local-notifications'
+
 import { ReminderView } from '../reminder-view/reminder-view';
 import { AddReminder } from '../add-reminder/add-reminder';
 import { LoginPage } from '../login/login';
@@ -13,17 +15,25 @@ import { FireAuthService } from '../../providers/fire-auth-service';
 @Component({
   selector: 'page-reminders',
   templateUrl: 'reminders.html',
-  providers: [FireAuthService]
+  providers: [FireAuthService, LocalNotifications]
 })
 export class RemindersPage {
   private reminders: Array<any> = [];
 
   constructor(public navCtrl: NavController,
     private auth: FireAuthService,
-    private alertCtrl: AlertController) { }
+    private alertCtrl: AlertController,
+    private notify: LocalNotifications) { }
 
   ionViewWillEnter() {
     this.updateReminders();
+    this.notify.hasPermission().then(val => {
+      if (val) {
+        //TODO schedule reminder notifications
+      } else {
+        //TODO get permission
+      }
+    }).catch(err => { alert(err)});
   }
 
   updateReminders() {

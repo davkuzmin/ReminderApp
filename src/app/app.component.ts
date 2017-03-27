@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, AlertController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { LoginPage } from '../pages/login/login';
@@ -10,11 +10,9 @@ import firebase from 'firebase';
   templateUrl: 'app.html',
 })
 export class MyApp {
-  //@ViewChild('content') nav: Nav;
-
   public rootPage = LoginPage;
 
-  constructor(platform: Platform) {
+  constructor(public platform: Platform, public alertCtrl: AlertController) {
     firebase.initializeApp({
       apiKey: "AIzaSyDjrD83IP68C1KxkKOdrUoX7MYCReD1Snk",
       authDomain: "reminderapp-bb5a7.firebaseapp.com",

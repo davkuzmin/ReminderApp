@@ -37,8 +37,7 @@
     <plugin name="cordova-plugin-device" spec="1.1.4" />
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
     <plugin name="phonegap-plugin-push" spec="~1.10.0">
-        <variable name="SENDER" value="554293570088" />
-        <variable name="SENDER_ID" value="85075801930" />
+        <variable name="SENDER_ID" value="554293570088" />
     </plugin>
     <plugin name="cordova-sqlite-storage" spec="~2.0.2" />
 </widget>
