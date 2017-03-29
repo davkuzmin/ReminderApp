@@ -35,4 +35,8 @@ export default class Utils {
       var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
       return new Date(Date.parse(offsetISO) + tzoffset);
     }
+
+    static getTimeStringFromDate(date: Date): string {
+      return date.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
+    }
 }
