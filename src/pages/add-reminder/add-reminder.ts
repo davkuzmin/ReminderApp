@@ -2,12 +2,15 @@ import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 import Utils from '../../app/utils';
 
+import { NotificationService } from '../../providers/notification-service';
+
 import firebase from 'firebase';
 import { UUID } from 'angular2-uuid';
 
 @Component({
   selector: 'page-add-reminder',
-  templateUrl: 'add-reminder.html'
+  templateUrl: 'add-reminder.html',
+  providers: [NotificationService]
 })
 export class AddReminder {
   private categories = ["Inspirational", "Motivational", "Thoughtful", "Persuasive"];
@@ -24,7 +27,9 @@ export class AddReminder {
     notified: false
   };
 
-  constructor(public navCtrl: NavController, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController,
+    private toastCtrl: ToastController,
+    public notifications: NotificationService) {
     this.reminder.datetime = Utils.getOffsetISOString();
   }
 
@@ -33,8 +38,11 @@ export class AddReminder {
 
     if (this.isValidDate(this.reminder.datetime)) {
       firebase.database().ref(firebase.auth().currentUser.uid + '/' + this.reminder.id).set(this.reminder).then(() => {
+        this.notifications.scheduleNotification(this.reminder);
         self.savedToast().present();
         self.navCtrl.pop();
+      }).catch(err => {
+        this.errToast(err.message).present();
       });
     } else {
       this.invalidDateToast().present();
@@ -56,6 +64,14 @@ export class AddReminder {
   invalidDateToast() {
     return this.toastCtrl.create({
       message: 'Invalid date or time!',
+      duration: 2000,
+      position: 'bottom',
+    });
+  }
+
+  errToast(msg: string) {
+    return this.toastCtrl.create({
+      message: msg,
       duration: 2000,
       position: 'bottom',
     });

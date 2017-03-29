@@ -12,11 +12,12 @@ import Utils from '../../app/utils';
 
 import firebase from 'firebase';
 import { FireAuthService } from '../../providers/fire-auth-service';
+import { NotificationService } from '../../providers/notification-service';
 
 @Component({
   selector: 'page-reminders',
   templateUrl: 'reminders.html',
-  providers: [FireAuthService, LocalNotifications]
+  providers: [FireAuthService, LocalNotifications, NotificationService]
 })
 export class RemindersPage {
   private loader = null;
@@ -25,7 +26,7 @@ export class RemindersPage {
   constructor(public navCtrl: NavController,
     private auth: FireAuthService,
     private alertCtrl: AlertController,
-    private notify: LocalNotifications) { }
+    private notifications: NotificationService) { }
 
   ionViewWillEnter() {
     this.updateReminders();
@@ -36,7 +37,7 @@ export class RemindersPage {
       if (user) {
         firebase.database().ref(user.uid).once('value').then((snapshot) => {
           this.reminders = Utils.ObjToArray(snapshot.val());
-          this.checkNotifications();
+          this.notifications.checkNotifications(this.reminders);
         });
       }
     });
@@ -54,33 +55,5 @@ export class RemindersPage {
     this.navCtrl.push(ReminderView, {
       reminder:reminder
     });
-  }
-
-  checkNotifications() {
-    this.notify.hasPermission().then(val => {
-      this.reminders.forEach(reminder => {
-        this.notify.isScheduled(reminder.id).then((isScheduled) => {
-          if (!isScheduled && !this.isOldReminder(reminder)) {
-            this.scheduleNotification(reminder);
-          }
-        });
-      });
-    }).catch(err => { alert(err)});
-  }
-
-  scheduleNotification(reminder) {
-    let info = reminder.category + ' ' + reminder.type
-    let date = Utils.getDateFromOffsetISOString(reminder.datetime);
-    let time = Utils.getTimeStringFromDate(date);
-
-    this.notify.schedule({
-      id: reminder.id,
-      text: 'You have a ' + info + ' at ' + time,
-      at: date
-    });
-  }
-
-  isOldReminder(reminder): boolean {
-    return Utils.getDateFromOffsetISOString(reminder.datetime) < new Date();
   }
 }
