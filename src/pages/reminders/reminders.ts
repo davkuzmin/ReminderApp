@@ -6,6 +6,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications'
 import { ReminderView } from '../reminder-view/reminder-view';
 import { AddReminder } from '../add-reminder/add-reminder';
 import { LoginPage } from '../login/login';
+import { OffsetISODate } from '../../app/pipes';
 
 import Utils from '../../app/utils';
 

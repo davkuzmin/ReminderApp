@@ -11,6 +11,7 @@ import { AddReminder } from '../pages/add-reminder/add-reminder';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { ReminderView } from '../pages/reminder-view/reminder-view';
+import { OffsetISODate } from './pipes'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ReminderView } from '../pages/reminder-view/reminder-view';
     LoginPage,
     RegisterPage,
     ViewGuide,
-    ReminderView
+    ReminderView,
+    OffsetISODate
   ],
   imports: [
     IonicModule.forRoot(MyApp),

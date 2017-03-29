@@ -16,7 +16,7 @@
         <ion-icon [name]="getSocialMediaIcon(reminder.type)"></ion-icon>
       </ion-avatar>
       <h2>{{reminder.category}}</h2>
-      <h3>{{reminder.date | date: 'MMMM d, yyyy h:mm a'}}</h3>
+      <h3>{{reminder.datetime | offsetISODate | date: 'MMMM d, yyyy h:mm a'}}</h3>
       <p>{{reminder.notes}}</p>
 
       <button ion-button clear item-right (click)="viewReminder(reminder)">View</button>
