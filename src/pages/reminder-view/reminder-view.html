@@ -1,12 +1,31 @@
 <ion-header>
-<ion-navbar color="primary">
-<ion-title>
-{{reminder.category}}
-</ion-title>
-</ion-navbar>
+    <ion-navbar color="primary">
+        <ion-title>
+            Post Information
+        </ion-title>
+    </ion-navbar>
 </ion-header>
-
 <ion-content padding>
+<<<<<<< HEAD
+    <ion-card>
+        <ion-card-content>
+            Post Category: <strong>{{reminder.category}}</strong>
+            <hr> 
+            Date: <strong>{{reminder.date | date: "MM/dd/yy"}} </strong>
+            <hr>
+            <hr> 
+            Time: <strong>{{reminder.time}}</strong>
+            <ion-datetime displayFormat="h:mm a" [(ngModel)]="reminder.time"></ion-datetime>
+            <hr> 
+            Social Media: {{reminder.type}}
+            <ion-icon style="position: relative, left: 50%" [name]="getSocialMediaIcon(reminder.type)"></ion-icon>
+            <hr>
+            Media Type: <strong>{{reminder.media}}</strong>
+            <hr> Notes: <strong>{{reminder.notes}}</strong>
+        </ion-card-content>
+    </ion-card>
+    <button id="complete" ion-button color="danger" (click)="deleteReminder(reminder)" round>Complete</button>
+=======
 <ion-card (swipe)="onSwipe($event)">
 <ion-card-content>
 
@@ -21,4 +40,11 @@
 
 <button ion-button color="danger" (click)="confirmDelete()">Delete</button>
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
+>>>>>>> origin/master
+>>>>>>> Stashed changes
 </ion-content>
