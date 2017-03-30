@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar align-title="center">
-    <ion-title>Post Reminders</ion-title>
+    <ion-title>Reminders</ion-title>
     <ion-buttons end>
       <button ion-button outline="true" (click)="addReminder()">
         <ion-icon name="md-add"></ion-icon>
@@ -21,15 +21,6 @@
       <h2>{{reminder.category}}</h2>
       <h3>{{reminder.datetime | offsetISODate | date: 'MMMM d, yyyy h:mm a'}}</h3>
       <p>{{reminder.notes}}</p>
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <button ion-button clear item-right (click)="viewReminder(reminder)">View</button>
-=======
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
     </ion-item>
 
     <ion-list-header *ngIf="pastReminders.length > 0">
@@ -42,13 +33,6 @@
       <h2>{{reminder.category}}</h2>
       <h3>{{reminder.datetime | offsetISODate | date: 'MMMM d, yyyy h:mm a'}}</h3>
       <p>{{reminder.notes}}</p>
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
     </ion-item>
   </ion-list>
 </ion-content>

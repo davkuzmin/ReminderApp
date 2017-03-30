@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar align-title="center">
-    <ion-title>New Post Reminder</ion-title>
+    <ion-title>New Reminder</ion-title>
     <ion-buttons end>
       <button ion-button outline="true" (click)="saveReminder()">
         <ion-icon name="md-checkmark"></ion-icon>
@@ -34,20 +34,6 @@
     <ion-label>Media Type</ion-label>
     <ion-select [(ngModel)]="reminder.media">
       <ion-option *ngFor="let media of medias">{{media}}</ion-option>
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label>Media Type</ion-label>
-    <ion-select [(ngModel)]="reminder.media" multiple="true">
-      <ion-option value="Photo" selected="true">Photo</ion-option>
-      <ion-option value="Video">Video</ion-option>
-      <ion-option value="Live">Live</ion-option>
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
     </ion-select>
   </ion-item>
   <ion-item>

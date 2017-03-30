@@ -19,20 +19,6 @@ export class AddReminder {
   private medias = ["Text", "Image", "Video"];
 
   public reminder = {
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-    date: new Date().toISOString(),
-    time: '',
-    category: '',
-    type: '',
-    notes: '',
-    media:''
-=======
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
     id: UUID.UUID(),
     datetime: '',
     category: this.categories[0],
@@ -40,13 +26,6 @@ export class AddReminder {
     media: this.medias[0],
     notes: '',
     notified: false
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
   };
 
   constructor(public navCtrl: NavController,

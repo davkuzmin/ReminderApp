@@ -4,20 +4,7 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ViewGuide } from '../view-guide/view-guide';
 import { GuideService } from '../../providers/guide-service';
 
-<<<<<<< Updated upstream
 import firebase from 'firebase';
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-import Utils from '../../app/utils';
-
-=======
-import firebase from 'firebase';
->>>>>>> origin/master
-=======
-import firebase from 'firebase';
->>>>>>> origin/master
->>>>>>> Stashed changes
 
 @Component ({
 	selector: 'reminder-view',
@@ -47,10 +34,6 @@ export class ReminderView {
 		});
 
 	}
-
-	getSocialMediaIcon(type: string) {
-    return Utils.getSocialMediaIcon(type);
-  }
 
 	onSwipe($event) { //http://stackoverflow.com/questions/36970425/determine-whether-a-swipe-event-is-for-a-left-swipe-or-a-right-swipe
 		if ($event.direction == 2 && this.correspondingGuide) { //right to left swipe.
