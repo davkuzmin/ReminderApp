@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { ViewGuide } from '../view-guide/view-guide';
 import { GuideService } from '../../providers/guide-service';
 
+import firebase from 'firebase';
 
 @Component ({
 	selector: 'reminder-view',
@@ -17,7 +18,8 @@ export class ReminderView {
 
 	constructor(public navCtrl: NavController,
 		public params: NavParams,
-		public guideService: GuideService) {
+		public guideService: GuideService,
+		public alertCtrl: AlertController) {
 		this.reminder = params.get('reminder');
 
 		//placeholder guide
@@ -37,5 +39,31 @@ export class ReminderView {
 		if ($event.direction == 2 && this.correspondingGuide) { //right to left swipe.
 			this.navCtrl.push(ViewGuide, this.correspondingGuide);
     }
+	}
+
+	confirmDelete() {
+	  let alert = this.alertCtrl.create({
+	    title: 'Confirm',
+	    message: 'Do you want to delete this reminder?',
+	    buttons: [
+	      {
+	        text: 'No',
+	        role: 'cancel',
+	      },
+	      {
+	        text: 'Yes',
+	        handler: () => {
+						this.delete();
+	        }
+	      }
+	    ]
+	  });
+	  alert.present();
+	}
+
+	delete() {
+		firebase.database().ref(firebase.auth().currentUser.uid + '/' + this.reminder.id).remove().then(() => {
+			this.navCtrl.pop();
+		});
 	}
 }
