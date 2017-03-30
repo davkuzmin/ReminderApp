@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 
-import { LocalNotifications } from '@ionic-native/local-notifications'
-
 import { ReminderView } from '../reminder-view/reminder-view';
 import { AddReminder } from '../add-reminder/add-reminder';
 import { LoginPage } from '../login/login';
@@ -12,6 +10,8 @@ import Utils from '../../app/utils';
 
 import firebase from 'firebase';
 import { FireAuthService } from '../../providers/fire-auth-service';
+
+import { LocalNotifications } from '@ionic-native/local-notifications'
 import { NotificationService } from '../../providers/notification-service';
 
 @Component({

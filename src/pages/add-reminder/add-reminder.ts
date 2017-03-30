@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 import Utils from '../../app/utils';
 
+import { LocalNotifications } from '@ionic-native/local-notifications'
 import { NotificationService } from '../../providers/notification-service';
 
 import firebase from 'firebase';
@@ -10,7 +11,7 @@ import { UUID } from 'angular2-uuid';
 @Component({
   selector: 'page-add-reminder',
   templateUrl: 'add-reminder.html',
-  providers: [NotificationService]
+  providers: [LocalNotifications, NotificationService]
 })
 export class AddReminder {
   private categories = ["Inspirational", "Motivational", "Thoughtful", "Persuasive"];
