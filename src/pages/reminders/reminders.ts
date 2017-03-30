@@ -23,6 +23,9 @@ export class RemindersPage {
   private loader = null;
   private reminders: Array<any> = [];
 
+  private currentReminders: Array<any> = [];
+  private pastReminders: Array<any> = [];
+
   constructor(public navCtrl: NavController,
     private auth: FireAuthService,
     private alertCtrl: AlertController,
@@ -37,6 +40,9 @@ export class RemindersPage {
       if (user) {
         firebase.database().ref(user.uid).once('value').then((snapshot) => {
           this.reminders = Utils.ObjToArray(snapshot.val());
+          this.currentReminders = this.getCurrentReminders();
+          this.pastReminders = Utils.arrayDiff(this.reminders, this.currentReminders);
+
           this.notifications.checkNotifications(this.reminders);
         });
       }
@@ -54,6 +60,13 @@ export class RemindersPage {
   viewReminder(reminder) {
     this.navCtrl.push(ReminderView, {
       reminder:reminder
+    });
+  }
+
+  getCurrentReminders() {
+    let now = new Date();
+    return this.reminders.filter(reminder => {
+      return Utils.getDateFromOffsetISOString(reminder.datetime) >= now;
     });
   }
 }

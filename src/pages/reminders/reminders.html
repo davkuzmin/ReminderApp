@@ -11,15 +11,28 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let reminder of reminders">
+    <ion-list-header *ngIf="currentReminders.length > 0">
+      Scheduled Reminders
+    </ion-list-header>
+    <ion-item *ngFor="let reminder of currentReminders" (click)="viewReminder(reminder)">
       <ion-avatar item-left>
         <ion-icon [name]="getSocialMediaIcon(reminder.type)"></ion-icon>
       </ion-avatar>
       <h2>{{reminder.category}}</h2>
       <h3>{{reminder.datetime | offsetISODate | date: 'MMMM d, yyyy h:mm a'}}</h3>
       <p>{{reminder.notes}}</p>
+    </ion-item>
 
-      <button ion-button clear item-right (click)="viewReminder(reminder)">View</button>
+    <ion-list-header *ngIf="pastReminders.length > 0">
+      Past Reminders
+    </ion-list-header>
+    <ion-item *ngFor="let reminder of pastReminders" (click)="viewReminder(reminder)">
+      <ion-avatar item-left>
+        <ion-icon [name]="getSocialMediaIcon(reminder.type)"></ion-icon>
+      </ion-avatar>
+      <h2>{{reminder.category}}</h2>
+      <h3>{{reminder.datetime | offsetISODate | date: 'MMMM d, yyyy h:mm a'}}</h3>
+      <p>{{reminder.notes}}</p>
     </ion-item>
   </ion-list>
 </ion-content>

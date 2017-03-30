@@ -39,4 +39,8 @@ export default class Utils {
     static getTimeStringFromDate(date: Date): string {
       return date.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
     }
+
+    static arrayDiff(a: Array<any>, b: Array<any>): Array<any> {
+      return a.filter(x => b.indexOf(x) < 0);
+    }
 }
