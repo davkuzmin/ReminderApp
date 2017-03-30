@@ -10,7 +10,7 @@
   <ion-list>
     <ion-item *ngFor="let guide of guides" (click)="viewGuide(guide)">
       <h2>{{guide.title}}</h2>
-      <p>{{guide.abbreviatedContent}}</p>
+      <p>{{guide.content}}</p>
     </ion-item>
   </ion-list>
 </ion-content>

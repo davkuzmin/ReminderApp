@@ -17,7 +17,6 @@ export class GuidesPage {
       this.guides = guides.map((guide) => {
         return {
           title: guide.split(' ')[0],
-          abbreviatedContent: guide.substring(0, 20) + '...',
           content: guide
         };
       });
