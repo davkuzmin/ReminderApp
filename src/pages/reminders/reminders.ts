@@ -14,11 +14,17 @@ import { FireAuthService } from '../../providers/fire-auth-service';
 import { LocalNotifications } from '@ionic-native/local-notifications'
 import { NotificationService } from '../../providers/notification-service';
 
+
+import { PopoverController} from 'ionic-angular';
+import { PopoverContentPage } from './popover';
+
+
 @Component({
   selector: 'page-reminders',
   templateUrl: 'reminders.html',
   providers: [FireAuthService, LocalNotifications, NotificationService]
 })
+
 export class RemindersPage {
   private loader = null;
   private reminders: Array<any> = [];
@@ -29,7 +35,17 @@ export class RemindersPage {
   constructor(public navCtrl: NavController,
     private auth: FireAuthService,
     private alertCtrl: AlertController,
-    private notifications: NotificationService) { }
+    private notifications: NotificationService, 
+    public popoverCtrl: PopoverController){ }
+
+
+openPopover(myEvent) {
+    let popover = this.popoverCtrl.create(PopoverContentPage);
+    popover.present({
+      ev: myEvent
+    });
+  }
+
 
   ionViewWillEnter() {
     this.updateReminders();

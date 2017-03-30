@@ -2,8 +2,8 @@
   <ion-navbar align-title="center">
     <ion-title>Reminders</ion-title>
     <ion-buttons end>
-      <button ion-button outline="true" (click)="addReminder()">
-        <ion-icon name="md-add"></ion-icon>
+      <button ion-button icon-only (click)="openPopover($event)">
+        <ion-icon name="more"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>

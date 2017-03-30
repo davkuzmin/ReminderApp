@@ -19,6 +19,7 @@ export class AddReminder {
   private medias = ["Text", "Image", "Video"];
 
   public reminder = {
+
     id: UUID.UUID(),
     datetime: '',
     category: this.categories[0],
@@ -26,6 +27,7 @@ export class AddReminder {
     media: this.medias[0],
     notes: '',
     notified: false
+    
   };
 
   constructor(public navCtrl: NavController,

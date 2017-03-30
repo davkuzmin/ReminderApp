@@ -3,6 +3,8 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { ViewGuide } from '../view-guide/view-guide';
 import { GuideService } from '../../providers/guide-service';
+import Utils from '../../app/utils';
+
 
 import firebase from 'firebase';
 
@@ -41,6 +43,10 @@ export class ReminderView {
     }
 	}
 
+	getSocialMediaIcon(type: string) {
+    return Utils.getSocialMediaIcon(type);
+  }
+  
 	confirmDelete() {
 	  let alert = this.alertCtrl.create({
 	    title: 'Confirm',

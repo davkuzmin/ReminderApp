@@ -11,6 +11,7 @@ import { AddReminder } from '../pages/add-reminder/add-reminder';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { ReminderView } from '../pages/reminder-view/reminder-view';
+import { PopoverContentPage } from '../pages/reminders/popover';
 import { OffsetISODate } from './pipes'
 
 @NgModule({
@@ -24,7 +25,8 @@ import { OffsetISODate } from './pipes'
     RegisterPage,
     ViewGuide,
     ReminderView,
-    OffsetISODate
+    OffsetISODate,
+    PopoverContentPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -40,7 +42,8 @@ import { OffsetISODate } from './pipes'
     LoginPage,
     RegisterPage,
     ViewGuide,
-    ReminderView
+    ReminderView,
+    PopoverContentPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
