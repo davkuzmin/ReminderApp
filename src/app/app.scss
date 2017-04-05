@@ -15,24 +15,6 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-.icon {
-  font-size: 30px;
-}
-
-.warning-toast {
-  background-color: red;
-}
-
-.row, .scroll {
-  height: 100%;
-}
-
 .no-padding {
   padding: 0;
-}
-
-.flex-parent-center {
-  display: flex !important;
-  align-content: center!important;
-  align-items: center!important;
 }
