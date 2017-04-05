@@ -4,8 +4,7 @@ page-login {
     background: color($colors, secondary);
 
     .logo-row {
-      padding-top: 50px;
-      padding-bottom: 20px;
+
     }
 
     .login-box {
@@ -39,12 +38,8 @@ page-login {
        box-shadow: none !important;
      }
 
-     .login-btn {
-       border-radius: 30px !important;
-     }
-
      .register-btn {
-       font-size: 1.1em;
+       font-size: 1.2em;
      }
   }
 

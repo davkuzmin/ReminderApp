@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 import Utils from '../../app/utils';
 
-import { LocalNotifications } from '@ionic-native/local-notifications'
-import { NotificationService } from '../../providers/notification-service';
+//import { LocalNotifications } from '@ionic-native/local-notifications'
+//import { NotificationService } from '../../providers/notification-service';
 
 import firebase from 'firebase';
 import { UUID } from 'angular2-uuid';
@@ -11,15 +11,13 @@ import { UUID } from 'angular2-uuid';
 @Component({
   selector: 'page-add-reminder',
   templateUrl: 'add-reminder.html',
-  providers: [LocalNotifications, NotificationService]
 })
 export class AddReminder {
-  private categories = ["Inspirational", "Motivational", "Thoughtful", "Persuasive"];
-  private types = ["Facebook", "Twitter", "Google+"];
-  private medias = ["Text", "Image", "Video"];
+  private categories = ["Inspiration", "Motivation", "Lifestyle", "Family", "Fun", "Hobbies", "Ask a Question", "Product/Service", "Personal Story", "Business"];
+  private types = ["Facebook", "Instagram", "Twitter", "Google+", "Other"];
+  private medias = ["Text Only", "Image/Meme", "Video"];
 
   public reminder = {
-
     id: UUID.UUID(),
     datetime: '',
     category: this.categories[0],
@@ -27,12 +25,10 @@ export class AddReminder {
     media: this.medias[0],
     notes: '',
     notified: false
-    
   };
 
   constructor(public navCtrl: NavController,
-    private toastCtrl: ToastController,
-    public notifications: NotificationService) {
+    private toastCtrl: ToastController) {
     this.reminder.datetime = Utils.getOffsetISOString();
   }
 
@@ -41,7 +37,7 @@ export class AddReminder {
 
     if (this.isValidDate(this.reminder.datetime)) {
       firebase.database().ref(firebase.auth().currentUser.uid + '/' + this.reminder.id).set(this.reminder).then(() => {
-        this.notifications.scheduleNotification(this.reminder);
+        //this.notifications.scheduleNotification(this.reminder);
         self.savedToast().present();
         self.navCtrl.pop();
       }).catch(err => {

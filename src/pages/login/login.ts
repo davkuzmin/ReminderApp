@@ -1,44 +1,61 @@
-import { Component, NgZone } from '@angular/core';
-import { RegisterPage } from '../register/register';
-import { TabsPage } from '../tabs/tabs';
+import { Component } from '@angular/core';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 
-import { NavController, ToastController } from 'ionic-angular';
-
+import { Facebook } from '@ionic-native/facebook';
+import { FireAuthService } from '../../providers/fire-auth-service';
 import firebase from 'firebase';
-import { FireAuthService } from '../../providers/fire-auth-service'
 
+import { HowToPage } from '../how-to/how-to';
+import { RegisterPage } from '../register/register';
+/*
+  Generated class for the Login page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  providers: [FireAuthService]
 })
 export class LoginPage {
-  public email;
-  public password;
+  public email = '';
+  public password = '';
 
   constructor(public navCtrl: NavController,
-    private toastCtrl: ToastController,
-    private auth: FireAuthService,
-    private zone: NgZone) { }
+    public navParams: NavParams,
+    private facebook: Facebook,
+    private toastCtrl: ToastController) {}
 
-  login() {
-    let self = this;
-
-    return firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
-      //https://forum.ionicframework.com/t/after-setroot-tabspage-the-default-tab-page-appears-twice/71770/10
-      this.zone.run(() => {
-        this.navCtrl.setRoot(TabsPage, {}, {animate: false});
-      });
-    }).catch(function(error) {
-      self.invalidLogin(error);
+  login(email: string, password: string): void {
+    firebase.auth().signInWithEmailAndPassword(this.email.trim(), this.password.trim()).then(res => {
+      this.navCtrl.setRoot(HowToPage);
+    }).catch(e => {
+      this.error(e);
     });
+  }
+
+  loginFacebook(): void {
+    this.facebook.login(['email']).then( (response) => {
+      const facebookCredential = firebase.auth.FacebookAuthProvider
+        .credential(response.authResponse.accessToken);
+
+      firebase.auth().signInWithCredential(facebookCredential)
+        .then((success) => {
+          alert("Firebase success: " + JSON.stringify(success));
+          this.navCtrl.setRoot(HowToPage);
+        })
+        .catch((error) => {
+          alert("Firebase failure: " + error.message);
+      });
+
+    }).catch((error) => { alert(error) });
   }
 
   register() {
     this.navCtrl.push(RegisterPage);
   }
 
-  invalidLogin(e) {
+  error(e) {
     let toast = this.toastCtrl.create({
       message: e.message,
       duration: 5000,

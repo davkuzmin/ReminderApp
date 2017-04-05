@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RemindersPage } from '../reminders/reminders';
-import { TabsPage } from '../tabs/tabs';
+import { HowToPage } from '../how-to/how-to';
 
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 
 import firebase from 'firebase';
 
@@ -11,18 +11,28 @@ import firebase from 'firebase';
   templateUrl: 'register.html'
 })
 export class RegisterPage {
-  public email;
-  public password;
+  public email: string = "";
+  public password: string = "";
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private toastCtrl: ToastController) {
 
   }
 
   register() {
-    firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(() => {
-      this.navCtrl.push(TabsPage, {}, {animate: false});
-    }).catch(function(error) {
-      console.log(error.message);
+    firebase.auth().createUserWithEmailAndPassword(this.email.trim(), this.password.trim()).then(() => {
+      this.navCtrl.push(HowToPage, {}, {animate: false});
+    }).catch(function(e) {
+      this.showToast(e);
     });
+  }
+
+  showToast(e) {
+    let toast = this.toastCtrl.create({
+      message: e.message,
+      duration: 5000,
+      position: 'bottom'
+    });
+
+    toast.present();
   }
 }

@@ -1,50 +1,61 @@
 import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicStorageModule } from '@ionic/storage'
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { GuidesPage } from '../pages/guides/guides';
-import { RemindersPage } from '../pages/reminders/reminders';
-import { TabsPage } from '../pages/tabs/tabs';
 
-import { ViewGuide } from '../pages/view-guide/view-guide';
-import { AddReminder } from '../pages/add-reminder/add-reminder';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
-import { ReminderView } from '../pages/reminder-view/reminder-view';
-import { PopoverContentPage } from '../pages/reminders/popover';
+import { HowToPage } from '../pages/how-to/how-to';
+import { SchedulePage } from '../pages/schedule/schedule';
+import { RockstarPage } from '../pages/rockstar/rockstar';
+import { SettingsPage } from '../pages/settings/settings';
+import { AboutPage } from '../pages/about/about';
+import { AddReminder } from '../pages/add-reminder/add-reminder';
+import { ViewReminder } from '../pages/view-reminder/view-reminder';
+
+import { Facebook } from '@ionic-native/facebook';
+import { FireAuthService } from '../providers/fire-auth-service';
+
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+
 import { OffsetISODate } from './pipes'
 
 @NgModule({
   declarations: [
     MyApp,
-    GuidesPage,
-    RemindersPage,
-    TabsPage,
-    AddReminder,
+    HowToPage,
+    SchedulePage,
     LoginPage,
     RegisterPage,
-    ViewGuide,
-    ReminderView,
+    AboutPage,
+    SettingsPage,
+    RockstarPage,
     OffsetISODate,
-    PopoverContentPage
+    AddReminder,
+    ViewReminder,
   ],
   imports: [
-    IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    GuidesPage,
-    RemindersPage,
-    TabsPage,
-    AddReminder,
+    HowToPage,
+    SchedulePage,
     LoginPage,
     RegisterPage,
-    ViewGuide,
-    ReminderView,
-    PopoverContentPage
+    AboutPage,
+    SettingsPage,
+    RockstarPage,
+    AddReminder,
+    ViewReminder,
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    StatusBar,
+    SplashScreen,
+    Facebook,
+    FireAuthService,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ]
 })
 export class AppModule {}
