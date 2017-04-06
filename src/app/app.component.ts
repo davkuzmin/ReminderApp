@@ -17,12 +17,16 @@ import { AboutPage } from '../pages/about/about';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
-
+  rootPage: any = null;
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
+
+    let self = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      self.nav.setRoot(user ? HowToPage : LoginPage);
+    });
 
     // used for an example of ngFor and navigation
     this.pages = [
