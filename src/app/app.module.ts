@@ -11,6 +11,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { AboutPage } from '../pages/about/about';
 import { AddReminder } from '../pages/add-reminder/add-reminder';
 import { ViewReminder } from '../pages/view-reminder/view-reminder';
+import { InfoModal } from '../pages/reminder-modal/reminder-modal';
 
 import { Facebook } from '@ionic-native/facebook';
 import { FireAuthService } from '../providers/fire-auth-service';
@@ -33,6 +34,7 @@ import { OffsetISODate } from './pipes'
     OffsetISODate,
     AddReminder,
     ViewReminder,
+    InfoModal,
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -49,6 +51,7 @@ import { OffsetISODate } from './pipes'
     RockstarPage,
     AddReminder,
     ViewReminder,
+    InfoModal,
   ],
   providers: [
     StatusBar,

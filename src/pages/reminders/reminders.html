@@ -11,7 +11,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-list-header *ngIf="currentReminders.length > 0">
+    <ion-list-header *ngIf="currentReminders.length > 0" id="future">
       Scheduled Reminders
     </ion-list-header>
     <ion-item *ngFor="let reminder of currentReminders" (click)="viewReminder(reminder)">
@@ -23,7 +23,7 @@
       <p>{{reminder.notes}}</p>
     </ion-item>
 
-    <ion-list-header *ngIf="pastReminders.length > 0">
+    <ion-list-header *ngIf="pastReminders.length > 0" id="past">
       Past Reminders
     </ion-list-header>
     <ion-item *ngFor="let reminder of pastReminders" (click)="viewReminder(reminder)">

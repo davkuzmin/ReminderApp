@@ -1,43 +1,46 @@
 <ion-header>
-  <ion-navbar align-title="center">
-    <ion-title>New Reminder</ion-title>
-    <ion-buttons end>
-      <button ion-button outline="true" (click)="saveReminder()">
-        <ion-icon name="md-checkmark"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+    <ion-navbar align-title="center">
+        <ion-title>New Reminder</ion-title>
+        <ion-buttons end>
+            <button ion-button outline="true" (click)="saveReminder()">
+                <ion-icon name="md-checkmark"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
 </ion-header>
-
 <ion-content padding>
-  <ion-item>
-    <ion-label>Category</ion-label>
-    <ion-select [(ngModel)]="reminder.category">
-      <ion-option *ngFor="let category of categories">{{category}}</ion-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label>Date</ion-label>
-    <ion-datetime displayFormat="MMMM DD, YYYY" pickerFormat="MM DD YYYY" [(ngModel)]="reminder.datetime"></ion-datetime>
-  </ion-item>
-  <ion-item>
-    <ion-label>Time</ion-label>
-    <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="reminder.datetime"></ion-datetime>
-  </ion-item>
-  <ion-item>
-    <ion-label>Social Media</ion-label>
-    <ion-select [(ngModel)]="reminder.type" multiple="true" required>
-      <ion-option *ngFor="let type of types">{{type}}</ion-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label>Media Type</ion-label>
-    <ion-select [(ngModel)]="reminder.media">
-      <ion-option *ngFor="let media of medias">{{media}}</ion-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-  <ion-label floating>Notes</ion-label>
-  <ion-textarea [(ngModel)]="reminder.notes"></ion-textarea>
-</ion-item>
+    <ion-item>
+        <ion-label>Category</ion-label>
+        <ion-select [(ngModel)]="reminder.category">
+            <ion-option *ngFor="let category of categories">{{category}}</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>Date</ion-label>
+        <ion-datetime displayFormat="MMMM DD, YYYY" pickerFormat="MM DD YYYY" [(ngModel)]="reminder.datetime"></ion-datetime>
+    </ion-item>
+    <ion-item>
+        <ion-label>Time</ion-label>
+        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="reminder.datetime"></ion-datetime>
+    </ion-item>
+    <ion-item>
+        <ion-label>Social Media</ion-label>
+        <ion-select [(ngModel)]="reminder.type" multiple="true" required>
+            <ion-option *ngFor="let type of types">{{type}}</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>Media Type</ion-label>
+        <ion-select [(ngModel)]="reminder.media">
+            <ion-option *ngFor="let media of medias">{{media}}</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Notes</ion-label>
+        <ion-textarea [(ngModel)]="reminder.notes"></ion-textarea>
+    </ion-item>
+
+    <button ion-button round (click)="openInfo()">
+        <ion-icon name="information-circle"></ion-icon>
+    </button>
 </ion-content>

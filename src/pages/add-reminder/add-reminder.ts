@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { ModalController, NavController, ToastController } from 'ionic-angular';
+import { InfoModal } from '../../pages/reminder-modal/reminder-modal';
+
 import Utils from '../../app/utils';
 
 //import { LocalNotifications } from '@ionic-native/local-notifications'
@@ -28,7 +30,7 @@ export class AddReminder {
   };
 
   constructor(public navCtrl: NavController,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController, public modalCtrl:ModalController) {
     this.reminder.datetime = Utils.getOffsetISOString();
   }
 
@@ -75,4 +77,15 @@ export class AddReminder {
       position: 'bottom',
     });
   }
+
+  openInfo() {
+    let myModal = this.modalCtrl.create(InfoModal);
+    myModal.present();
+  }
+
+
+
+
+
+
 }

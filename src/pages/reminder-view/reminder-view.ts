@@ -37,7 +37,11 @@ export class ReminderView {
 
 	}
 
-	onSwipe($event) { //http://stackoverflow.com/questions/36970425/determine-whether-a-swipe-event-is-for-a-left-swipe-or-a-right-swipe
+changeButton(event) {
+	event.target.setElementClass(event.target, "active");
+}
+
+	onSwipe($event) { //http://stackoverflow.com/questions/36970425/determine-whether-a-swipe-event-is-for-a-left-swipe-or-a-right-swipest
 		if ($event.direction == 2 && this.correspondingGuide) { //right to left swipe.
 			this.navCtrl.push(ViewGuide, this.correspondingGuide);
     }
@@ -46,7 +50,9 @@ export class ReminderView {
 	getSocialMediaIcon(type: string) {
     return Utils.getSocialMediaIcon(type);
   }
+  	
   
+
 	confirmDelete() {
 	  let alert = this.alertCtrl.create({
 	    title: 'Confirm',
