@@ -7,12 +7,8 @@ import firebase from 'firebase';
 
 import { HowToPage } from '../how-to/how-to';
 import { RegisterPage } from '../register/register';
-/*
-  Generated class for the Login page.
+import { SchedulePage } from '../schedule/schedule';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -28,7 +24,7 @@ export class LoginPage {
 
   login(email: string, password: string): void {
     firebase.auth().signInWithEmailAndPassword(this.email.trim(), this.password.trim()).then(res => {
-      this.navCtrl.setRoot(HowToPage);
+      this.afterLoginRedirect();
     }).catch(e => {
       this.error(e);
     });
@@ -42,7 +38,7 @@ export class LoginPage {
       firebase.auth().signInWithCredential(facebookCredential)
         .then((success) => {
           alert("Firebase success: " + JSON.stringify(success));
-          this.navCtrl.setRoot(HowToPage);
+          this.afterLoginRedirect();
         })
         .catch((error) => {
           alert("Firebase failure: " + error.message);
@@ -53,6 +49,10 @@ export class LoginPage {
 
   register() {
     this.navCtrl.push(RegisterPage);
+  }
+
+  afterLoginRedirect() {
+    this.navCtrl.setRoot(SchedulePage);
   }
 
   error(e) {

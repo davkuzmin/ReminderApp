@@ -9,9 +9,9 @@
     <ion-card>
         <ion-card-content>
             Post Category: <strong>{{reminder.category}}</strong>
-            <hr> 
+            <hr>
            Date & Time: <strong> {{reminder.datetime | offsetISODate | date: 'MMMM d, yyyy h:mm a'}} </strong>
-            <hr> 
+            <hr>
             Social Media: <strong>{{reminder.type}} </strong>
             <ion-icon [name]="getSocialMediaIcon(reminder.type)"></ion-icon>
             <hr> Notes: <strong>{{reminder.notes}}</strong>

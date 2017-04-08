@@ -11,6 +11,7 @@ import { LoginPage } from '../pages/login/login';
 import { RockstarPage } from '../pages/rockstar/rockstar';
 import { AboutPage } from '../pages/about/about';
 
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -25,7 +26,7 @@ export class MyApp {
 
     let self = this;
     firebase.auth().onAuthStateChanged(function(user) {
-      self.nav.setRoot(user ? HowToPage : LoginPage);
+      self.nav.setRoot(user ? SchedulePage : LoginPage);
     });
 
     // used for an example of ngFor and navigation
