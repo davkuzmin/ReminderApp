@@ -15,15 +15,7 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-ion-navbar ion-icon {
-  font-size: 1.8em;
-  color: white;
-}
-
-.toolbar-background {
-  background: color($colors, primary)
-}
-
-.toolbar-title {
-  color: white;
+.logout-icon {
+  vertical-align: -4px;
+  font-size: 1.5em;
 }

@@ -1,10 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, NavController, Platform } from 'ionic-angular';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
-import { FireAuthService } from '../providers/fire-auth-service';
 
 import firebase from 'firebase';
 
@@ -13,6 +10,7 @@ import { SchedulePage } from '../pages/schedule/schedule';
 import { LoginPage } from '../pages/login/login';
 import { RockstarPage } from '../pages/rockstar/rockstar';
 import { AboutPage } from '../pages/about/about';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -23,12 +21,7 @@ export class MyApp {
   rootPage: any = null;
   pages: Array<{title: string, component: any}>;
 
-  constructor(
-    public platform: Platform,
-    public statusBar: StatusBar,
-    public splashScreen: SplashScreen,
-    private fireAuth: FireAuthService
-  ) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     let self = this;
@@ -71,7 +64,7 @@ export class MyApp {
   }
 
   logout() {
-    this.fireAuth.logout().then(res => {
+    firebase.auth().signOut().then(res => {
       this.nav.setRoot(LoginPage);
     });
   }
