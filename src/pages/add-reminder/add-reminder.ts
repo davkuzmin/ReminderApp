@@ -14,7 +14,7 @@ import { UUID } from 'angular2-uuid';
   templateUrl: 'add-reminder.html',
 })
 export class AddReminder {
-  private categories = ["Inspirational", "Motivational", "Lifestyle", "Family", "Fun", "Hobbies", "Ask a Question", "Product/Service", "Personal Story", "Business"];
+  private categories = ["Inspiration", "Motivation", "Lifestyle", "Family", "Fun", "Hobbies", "Ask a Question", "Product/Service", "Personal Story", "Business"];
   private types = ["Facebook", "Instagram", "Twitter", "Google+", "Other"];
   private medias = ["Text Only", "Image/Meme", "Video"];
 
@@ -64,7 +64,7 @@ export class AddReminder {
 
   invalidDateToast() {
     return this.toastCtrl.create({
-      message: 'Select a future date and time',
+      message: 'Invalid date or time!',
       duration: 2000,
       position: 'bottom',
     });
