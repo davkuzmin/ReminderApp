@@ -8,6 +8,8 @@ import { OffsetISODate } from '../../app/pipes';
 import { AddReminder } from '../add-reminder/add-reminder';
 import { ViewReminder } from '../view-reminder/view-reminder';
 
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 @Component({
   selector: 'page-schedule',
   templateUrl: 'schedule.html'
@@ -19,7 +21,13 @@ export class SchedulePage {
   private currentReminders: any[] = [];
   private pastReminders: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private loadingCtrl: LoadingController,
+    private localNotif: LocalNotifications,
+  ) {
+    this.localNotif.schedule({text: "Surprise!"});
+
     this.loading = this.loadingCtrl.create({
       content: 'Loading reminders...'
     });
