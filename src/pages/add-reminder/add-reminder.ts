@@ -3,8 +3,8 @@ import { NavController, ToastController } from 'ionic-angular';
 
 import Utils from '../../app/utils';
 
-//import { LocalNotifications } from '@ionic-native/local-notifications'
-//import { NotificationService } from '../../providers/notification-service';
+//import { LocalNotifications } from '@ionic-native/local-notifications';
+import { NotificationService } from '../../providers/notification-service';
 
 import firebase from 'firebase';
 import { UUID } from 'angular2-uuid';
@@ -29,7 +29,8 @@ export class AddReminder {
   };
 
   constructor(public navCtrl: NavController,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    private notifications: NotificationService) {
     this.reminder.datetime = Utils.getOffsetISOString();
   }
 
@@ -38,7 +39,7 @@ export class AddReminder {
 
     if (this.isValidDate(this.reminder.datetime)) {
       firebase.database().ref(firebase.auth().currentUser.uid + '/' + this.reminder.id).set(this.reminder).then(() => {
-        //this.notifications.scheduleNotification(this.reminder);
+        this.notifications.scheduleNotification(this.reminder);
         self.savedToast().present();
         self.navCtrl.pop();
       }).catch(err => {
