@@ -13,6 +13,7 @@ import { AddReminder } from '../pages/add-reminder/add-reminder';
 import { ViewReminder } from '../pages/view-reminder/view-reminder';
 import { AddRockstarPage } from '../pages/add-rockstar/add-rockstar';
 import { ViewRockstarPage } from '../pages/view-rockstar/view-rockstar';
+import { ViewCommentsPage } from '../pages/view-comments/view-comments';
 
 import { Facebook } from '@ionic-native/facebook';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -41,6 +42,7 @@ import { OffsetISODate } from './pipes'
     ViewReminder,
     AddRockstarPage,
     ViewRockstarPage,
+    ViewCommentsPage,
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -59,6 +61,7 @@ import { OffsetISODate } from './pipes'
     ViewReminder,
     AddRockstarPage,
     ViewRockstarPage,
+    ViewCommentsPage,
   ],
   providers: [
     StatusBar,

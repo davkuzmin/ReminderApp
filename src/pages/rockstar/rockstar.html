@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card *ngFor="let guide of guides">
+  <ion-card *ngFor="let guide of guides" (click)="viewGuide(guide)">
 
   <ion-item>
     <ion-avatar item-left>
@@ -25,7 +25,7 @@
 
   <ion-card-content>
     <p>
-      {{guide.text}}
+      {{guide.content}}
     </p>
   </ion-card-content>
 
@@ -33,18 +33,18 @@
     <ion-col>
       <button ion-button icon-left clear small>
         <ion-icon name="thumbs-up"></ion-icon>
-        <div>12 Likes</div>
+        <div>{{numLikes(guide)}} Likes</div>
       </button>
     </ion-col>
     <ion-col>
       <button ion-button icon-left clear small>
         <ion-icon name="text"></ion-icon>
-        <div>4 Comments</div>
+        <div>{{numComments(guide)}} Comments</div>
       </button>
     </ion-col>
     <ion-col center text-center>
       <ion-note>
-        11h ago
+        {{timeAgo(guide)}}
       </ion-note>
     </ion-col>
   </ion-row>

@@ -2,26 +2,44 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { AddRockstarPage } from '../add-rockstar/add-rockstar';
+import { ViewRockstarPage } from '../view-rockstar/view-rockstar';
+
+import { GuideService } from '../../providers/guide-service';
+import Utils from '../../app/utils';
 
 import firebase from 'firebase';
 
 @Component({
   selector: 'page-rockstar',
   templateUrl: 'rockstar.html',
-  providers: [AddRockstarPage],
+  providers: [GuideService],
 })
 export class RockstarPage {
-  private user: any;
-  private guides = [{
-    title: "This is a guide for rockstars only!",
-    text: "Following these simple instructions will make you a rockstar in no time!"
-  },{
-    title: "This is a another guide!",
-    text: "Following these very simple instructions will make you a super duper rockstar in no time!"
-  }];
+  private user: any = null;
+  private guides = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.getUser();
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public guideService: GuideService,
+  ) {
+    this.getUser().then(() => {
+      this.guideService.getGuides().then((guides) => {
+        this.guides = guides;
+      });
+    });
+  }
+
+  ionViewWillEnter() {
+    this.updateGuides();
+  }
+
+  updateGuides() {
+    return this.getUser().then(() => {
+      this.guideService.getGuides().then((guides) => {
+        this.guides = guides;
+      });
+    });
   }
 
   getUser() {
@@ -38,5 +56,21 @@ export class RockstarPage {
 
   addGuide() {
     this.navCtrl.push(AddRockstarPage, this.user);
+  }
+
+  numComments(guide) {
+    return guide.comments ? guide.comments.length : 0;
+  }
+
+  numLikes(guide) {
+    return guide.likes ? guide.likes.length : 0;
+  }
+
+  timeAgo(guide) {
+    return Utils.getSmartDateTimeString(guide.createdOn);
+  }
+
+  viewGuide(guide) {
+    this.navCtrl.push(ViewRockstarPage, guide);
   }
 }

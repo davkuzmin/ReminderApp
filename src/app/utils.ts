@@ -1,5 +1,5 @@
 export default class Utils {
-    static ObjToArray(val: Object) {
+    static ObjToArray(val: Object): any[] {
       var res = [];
 
       Object.keys(val || []).forEach((key) => {
@@ -42,5 +42,27 @@ export default class Utils {
 
     static arrayDiff(a: Array<any>, b: Array<any>): Array<any> {
       return a.filter(x => b.indexOf(x) < 0);
+    }
+
+    static getSmartDateTimeString(dateTimeISO: string) {
+      let dateTime = new Date(dateTimeISO);
+      let now = new Date();
+
+      let difference = now.valueOf() - dateTime.valueOf();
+      let seconds = Math.trunc(difference / 1000);
+      let minutes = Math.trunc(seconds / 60);
+      let hours = Math.trunc(minutes / 60);
+
+      if (Math.abs(seconds) < 10) {
+        return "Just now";
+      } else if (seconds < 60) {
+        return seconds + ' seconds';
+      } else if (minutes < 60) {
+        return minutes + ' minutes';
+      } else if (hours < 12) {
+        return hours + ' hours';
+      } else {
+        return 'a long time ago';
+      }
     }
 }

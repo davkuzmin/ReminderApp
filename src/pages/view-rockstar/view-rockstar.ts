@@ -12,11 +12,9 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'view-rockstar.html'
 })
 export class ViewRockstarPage {
+  private guide;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ViewRockstarPage');
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.guide = this.navParams.data;
   }
-
 }
