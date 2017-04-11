@@ -15,8 +15,6 @@ import { ViewReminder } from '../pages/view-reminder/view-reminder';
 import { Facebook } from '@ionic-native/facebook';
 import { FireAuthService } from '../providers/fire-auth-service';
 
-import { LocalNotifications } from '@ionic-native/local-notifications';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -57,7 +55,6 @@ import { OffsetISODate } from './pipes'
     SplashScreen,
     Facebook,
     FireAuthService,
-    LocalNotifications,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
