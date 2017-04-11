@@ -13,13 +13,13 @@ import { AddReminder } from '../pages/add-reminder/add-reminder';
 import { ViewReminder } from '../pages/view-reminder/view-reminder';
 
 import { Facebook } from '@ionic-native/facebook';
-import { FireAuthService } from '../providers/fire-auth-service';
-
-import { LocalNotifications } from '@ionic-native/local-notifications';
-import { NotificationService } from '../providers/notification-service';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
+import { FireAuthService } from '../providers/fire-auth-service';
+import { NotificationService } from '../providers/notification-service';
+import { ToastService } from '../providers/toast-service';
 
 import { OffsetISODate } from './pipes'
 
@@ -60,6 +60,7 @@ import { OffsetISODate } from './pipes'
     FireAuthService,
     LocalNotifications,
     NotificationService,
+    ToastService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

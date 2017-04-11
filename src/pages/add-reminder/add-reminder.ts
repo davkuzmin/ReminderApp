@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 
-import Utils from '../../app/utils';
-
-//import { LocalNotifications } from '@ionic-native/local-notifications';
 import { NotificationService } from '../../providers/notification-service';
+import { ToastService } from '../../providers/toast-service';
+import Utils from '../../app/utils';
+import { UUID } from 'angular2-uuid';
 
 import firebase from 'firebase';
-import { UUID } from 'angular2-uuid';
 
 @Component({
   selector: 'page-add-reminder',
@@ -28,58 +27,32 @@ export class AddReminder {
     notified: false
   };
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     private toastCtrl: ToastController,
-    private notifications: NotificationService) {
+    private notifications: NotificationService,
+    private toaster: ToastService,
+  ) {
     this.reminder.datetime = Utils.getOffsetISOString();
   }
 
   saveReminder() {
-    let self = this;
+    let user = firebase.auth().currentUser;
 
     if (this.isValidDate(this.reminder.datetime)) {
-      firebase.database().ref(firebase.auth().currentUser.uid + '/' + this.reminder.id).set(this.reminder).then(() => {
+      firebase.database().ref('users/' + user.uid + '/reminders/' + this.reminder.id).set(this.reminder).then(() => {
         this.notifications.scheduleNotification(this.reminder);
-        self.savedToast().present();
-        self.navCtrl.pop();
+        this.toaster.makeToast(this.reminder.type + ' reminder added');
+        this.navCtrl.pop();
       }).catch(err => {
-        this.errToast(err.message).present();
+        this.toaster.makeToast(err.message);
       });
     } else {
-      this.invalidDateToast().present();
+      this.toaster.makeToast("Invalid date or time! Select a future date or time");
     }
   }
 
   isValidDate(isoDateString: string) {
     return Utils.getDateFromOffsetISOString(isoDateString) > new Date();
   }
-
-  savedToast() {
-    return this.toastCtrl.create({
-      message: this.reminder.type + ' reminder added',
-      duration: 2000,
-      position: 'bottom'
-    });
-  }
-
-  invalidDateToast() {
-    return this.toastCtrl.create({
-      message: 'Select a future date and time',
-      duration: 2000,
-      position: 'bottom',
-    });
-  }
-
-  errToast(msg: string) {
-    return this.toastCtrl.create({
-      message: msg,
-      duration: 2000,
-      position: 'bottom',
-    });
-  }
-
-
-
-
-
 }

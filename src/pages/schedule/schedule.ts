@@ -5,6 +5,8 @@ import firebase from 'firebase';
 import Utils from '../../app/utils';
 import { OffsetISODate } from '../../app/pipes';
 
+import { NotificationService } from '../../providers/notification-service';
+
 import { AddReminder } from '../add-reminder/add-reminder';
 import { ViewReminder } from '../view-reminder/view-reminder';
 
@@ -19,9 +21,11 @@ export class SchedulePage {
   private currentReminders: any[] = [];
   private pastReminders: any[] = [];
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public navParams: NavParams,
     private loadingCtrl: LoadingController,
+    private notifications: NotificationService,
   ) {
     this.loading = this.loadingCtrl.create({
       content: 'Loading reminders...'
@@ -34,15 +38,17 @@ export class SchedulePage {
   }
 
   updateReminders() {
+    var self = this;
+
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        firebase.database().ref(user.uid).once('value').then((snapshot) => {
-          this.reminders = Utils.ObjToArray(snapshot.val());
-          this.currentReminders = this.getCurrentReminders();
-          this.pastReminders = Utils.arrayDiff(this.reminders, this.currentReminders);
+        firebase.database().ref('users/' + user.uid + '/reminders').once('value').then((snapshot) => {
+          self.reminders = Utils.ObjToArray(snapshot.val());
+          self.currentReminders = self.getCurrentReminders();
+          self.pastReminders = Utils.arrayDiff(self.reminders, self.currentReminders);
 
-          //this.notifications.checkNotifications(this.reminders);
-          this.loading.dismiss();
+          self.notifications.checkNotifications(self.reminders);
+          self.loading.dismiss();
         });
       }
     });
