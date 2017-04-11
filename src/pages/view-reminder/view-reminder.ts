@@ -48,7 +48,8 @@ export class ViewReminder {
 	}
 
 	delete() {
-		firebase.database().ref(firebase.auth().currentUser.uid + '/' + this.reminder.id).remove().then(() => {
+		let user = firebase.auth().currentUser;
+		firebase.database().ref('users/' + user.uid + '/reminders/' + this.reminder.id).remove().then(() => {
 			this.navCtrl.pop();
 		});
 	}

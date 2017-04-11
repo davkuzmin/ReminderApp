@@ -1,0 +1,23 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Add New Guide</ion-title>
+    <ion-buttons end>
+        <button ion-button (click)="saveGuide()">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-input [(ngModel)]="guide.title" placeholder="Title"></ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-label floating>Content</ion-label>
+      <ion-textarea [(ngModel)]="guide.content"></ion-textarea>
+  </ion-item>
+</ion-content>

@@ -11,12 +11,15 @@ import { SettingsPage } from '../pages/settings/settings';
 import { AboutPage } from '../pages/about/about';
 import { AddReminder } from '../pages/add-reminder/add-reminder';
 import { ViewReminder } from '../pages/view-reminder/view-reminder';
+import { AddRockstarPage } from '../pages/add-rockstar/add-rockstar';
+import { ViewRockstarPage } from '../pages/view-rockstar/view-rockstar';
 
 import { Facebook } from '@ionic-native/facebook';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 
+import { GuideService } from '../providers/guide-service';
 import { FireAuthService } from '../providers/fire-auth-service';
 import { NotificationService } from '../providers/notification-service';
 import { ToastService } from '../providers/toast-service';
@@ -36,6 +39,8 @@ import { OffsetISODate } from './pipes'
     OffsetISODate,
     AddReminder,
     ViewReminder,
+    AddRockstarPage,
+    ViewRockstarPage,
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -52,6 +57,8 @@ import { OffsetISODate } from './pipes'
     RockstarPage,
     AddReminder,
     ViewReminder,
+    AddRockstarPage,
+    ViewRockstarPage,
   ],
   providers: [
     StatusBar,
@@ -61,6 +68,7 @@ import { OffsetISODate } from './pipes'
     LocalNotifications,
     NotificationService,
     ToastService,
+    GuideService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

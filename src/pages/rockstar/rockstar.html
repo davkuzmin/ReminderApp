@@ -5,7 +5,7 @@
     </button>
     <ion-title>Training</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="addGuide()">
+      <button ion-button icon-only *ngIf="isAdmin()" (click)="addGuide()">
         <ion-icon name="add-circle"></ion-icon>
       </button>
     </ion-buttons>
@@ -13,20 +13,20 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
+  <ion-card *ngFor="let guide of guides">
 
   <ion-item>
     <ion-avatar item-left>
       <img id="headshot" height="70" width="70" src="img/lisa_mustard_headshot.jpg" />
     </ion-avatar>
-    <h2></h2>
+    <h2>{{guide.title}}</h2>
     <p></p>
   </ion-item>
 
-  <img src="img/advance-card-bttf.png">
-
   <ion-card-content>
-    <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+    <p>
+      {{guide.text}}
+    </p>
   </ion-card-content>
 
   <ion-row>

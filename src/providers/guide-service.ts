@@ -1,25 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import firebase from 'firebase';
 import 'rxjs/add/operator/map';
 
+import Utils from '../app/utils';
 import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class GuideService {
 
-  constructor(public http: Http, private storage: Storage) {
-    storage.ready().then(() => {
+  constructor(
+    //private storage: Storage
+  ) {
+    //storage.ready().then(() => {
       //TODO store guides in Storage
+    //});
+  }
+
+  public fetch(): firebase.Promise<any> {
+    return firebase.database().ref('guides').once('value').then(snapshot => {
+      return Utils.ObjToArray(snapshot.val());
     });
   }
 
-  public fetch(): Promise<any> {
-    return new Promise(resolve => {
-      this.http.get('https://baconipsum.com/api/?type=meat-and-filler')
-        .map(res => res.json())
-        .subscribe(data => {
-          resolve(data);
-        });
-    });
+  public save(guide): firebase.Promise<any> {
+    return firebase.database().ref('guides/' + guide.id).set(guide);
   }
 }
