@@ -11,6 +11,8 @@ import firebase from 'firebase';
   templateUrl: 'register.html'
 })
 export class RegisterPage {
+  private firstName: string = "";
+  private lastName: string = "";
   public email: string = "";
   public password: string = "";
 

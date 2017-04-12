@@ -33,7 +33,7 @@ export class FireAuthService {
       var token = result.credential.accessToken;
       var user = result.user;
 
-      //TODO write info to db
+      return firebase.database().ref('users/' + user.uid).update(user.providerData[0]);
     }).catch(e => {
       this.toaster.makeToast(e.message);
     });
@@ -44,7 +44,9 @@ export class FireAuthService {
       const facebookCredential = firebase.auth.FacebookAuthProvider
         .credential(response.authResponse.accessToken);
 
-        return firebase.auth().signInWithCredential(facebookCredential);
+        return firebase.auth().signInWithCredential(facebookCredential).then((args) => {
+          alert(JSON.stringify(args));
+        });
     }).catch((e) => {
       this.toaster.makeToast(e.message);
     });
@@ -56,12 +58,13 @@ export class FireAuthService {
     });;
   }
 
-  register(email: string, password: string): firebase.Promise<any> {
+  register(email: string, password: string, name?: string): firebase.Promise<any> {
     return firebase.auth().createUserWithEmailAndPassword(email.trim(), password.trim()).then(user => {
       firebase.database().ref('users/' + user.uid).set({
         uid: user.uid,
         email: user.email,
         isAdmin: false,
+        displayName: name.trim(),
       });
     }).catch(e => {
       this.toaster.makeToast(e.message);

@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Training</ion-title>
+    <ion-title>Rockstar Zone</ion-title>
     <ion-buttons end>
       <button ion-button icon-only *ngIf="isAdmin()" (click)="addGuide()">
         <ion-icon name="add-circle"></ion-icon>
@@ -30,19 +30,19 @@
   </ion-card-content>
 
   <ion-row>
-    <ion-col>
+    <ion-col col-4>
       <button ion-button icon-left clear small>
         <ion-icon name="thumbs-up"></ion-icon>
-        <div>{{numLikes(guide)}} Likes</div>
+        <div>{{numLikes(guide)}}</div>
       </button>
     </ion-col>
-    <ion-col>
+    <ion-col col-4>
       <button ion-button icon-left clear small>
         <ion-icon name="text"></ion-icon>
-        <div>{{numComments(guide)}} Comments</div>
+        <div>{{numComments(guide)}}</div>
       </button>
     </ion-col>
-    <ion-col center text-center>
+    <ion-col col-4 center text-center>
       <ion-note>
         {{timeAgo(guide)}}
       </ion-note>

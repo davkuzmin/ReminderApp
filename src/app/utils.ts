@@ -54,17 +54,20 @@ export default class Utils {
       let seconds = Math.trunc(difference / 1000);
       let minutes = Math.trunc(seconds / 60);
       let hours = Math.trunc(minutes / 60);
+      let days = Math.trunc(hours / 24);
 
       if (Math.abs(seconds) < 10) {
         return "Just now";
       } else if (seconds < 60) {
         return seconds + ' seconds';
       } else if (minutes < 60) {
-        return minutes + ' minutes';
-      } else if (hours < 12) {
-        return hours + ' hours';
+        return minutes == 1 ? minutes + ' minute' : minutes + ' minutes';
+      } else if (hours < 24) {
+        return hours == 1 ? hours + ' hour' : hours + ' hours';
+      } else if (days < 7) {
+        return days == 1 ? days + ' day' : days + ' days';
       } else {
-        return 'a long time ago';
+        return dateTime.getMonth() + '/' + dateTime.getDate() + '/' + dateTime.getFullYear();
       }
     }
 

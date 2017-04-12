@@ -41,7 +41,7 @@ export class MyApp {
     this.pages = [
       { title: 'How To', component: HowToPage },
       { title: 'Scheduling', component: SchedulePage },
-      { title: 'Special Rockstar Training', component: RockstarPage },
+      { title: 'Rockstar Training', component: RockstarPage },
       { title: 'About', component: AboutPage }
     ];
 
