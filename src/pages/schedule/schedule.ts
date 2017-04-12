@@ -15,7 +15,7 @@ import { ViewReminder } from '../view-reminder/view-reminder';
   templateUrl: 'schedule.html'
 })
 export class SchedulePage {
-  private loading;
+  private loading = null;
 
   private reminders: any[] = [];
   private currentReminders: any[] = [];
@@ -58,7 +58,7 @@ export class SchedulePage {
     this.navCtrl.push(AddReminder);
   }
 
-  getSocialMediaIcon(type: string) {
+  getSocialMediaIcon(type: string[]) {
     return Utils.getSocialMediaIcon(type);
   }
 

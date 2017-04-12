@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, Platform } from 'ionic-angular';
 
 import { Facebook } from '@ionic-native/facebook';
 import { FireAuthService } from '../../providers/fire-auth-service';
@@ -17,10 +17,13 @@ export class LoginPage {
   public email = '';
   public password = '';
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public navParams: NavParams,
     private facebook: Facebook,
-    private toastCtrl: ToastController) {}
+    private toastCtrl: ToastController,
+    private platform: Platform,
+  ) {}
 
   login(email: string, password: string): void {
     firebase.auth().signInWithEmailAndPassword(this.email.trim(), this.password.trim()).then(res => {
@@ -33,24 +36,30 @@ export class LoginPage {
   loginFacebookDesktop() {
     let provider = new firebase.auth.FacebookAuthProvider();
     firebase.auth().signInWithPopup(provider).then(function(result) {
-      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
       var token = result.credential.accessToken;
-      // The signed-in user info.
       var user = result.user;
-      // ...
+
+      this.afterLoginRedirect();
     }).catch(function(error) {
       console.log(error.message);
     });
   }
 
-  loginFacebook(): void {
+  loginFacebook() {
+    if (this.platform.is('cordova')) {
+      this.loginFacebookCordova();
+    } else {
+      this.loginFacebookDesktop();
+    }
+  }
+
+  loginFacebookCordova(): void {
     this.facebook.login(['email']).then( (response) => {
       const facebookCredential = firebase.auth.FacebookAuthProvider
         .credential(response.authResponse.accessToken);
 
       firebase.auth().signInWithCredential(facebookCredential)
         .then((success) => {
-          alert("Firebase success: " + JSON.stringify(success));
           this.afterLoginRedirect();
         })
         .catch((error) => {

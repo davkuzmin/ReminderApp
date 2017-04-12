@@ -21,8 +21,8 @@ export class AddReminder {
     id: UUID.UUID(),
     datetime: '',
     category: this.categories[0],
-    type: this.types[0],
-    media: [this.medias[0]],
+    type: [this.types[0]],
+    media: this.medias[0],
     notes: '',
     notified: false
   };

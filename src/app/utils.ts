@@ -9,8 +9,8 @@ export default class Utils {
       return res;
     }
 
-    static getSocialMediaIcon(type: any) {
-      if (type instanceof Array && type.length>1) { //multiple types
+    static getSocialMediaIcon(type: string[]) {
+      if (type.length > 1) { //multiple types
         return 'star';
       } else {
         switch(type[0].toLowerCase()) {
