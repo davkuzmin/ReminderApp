@@ -11,7 +11,7 @@ export default class Utils {
 
     static getSocialMediaIcon(type: any) {
       if (type instanceof Array && type.length>1) { //multiple types
-        return 'star'
+        return 'star';
       } else {
         switch(type[0].toLowerCase()) {
           case 'google+':
@@ -21,7 +21,7 @@ export default class Utils {
           case 'facebook':
             return 'logo-facebook';
           case 'instagram':
-            return 'logo-instagram'
+            return 'logo-instagram';
         }
       }
     }

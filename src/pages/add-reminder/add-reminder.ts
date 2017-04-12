@@ -22,7 +22,7 @@ export class AddReminder {
     datetime: '',
     category: this.categories[0],
     type: this.types[0],
-    media: this.medias[0],
+    media: [this.medias[0]],
     notes: '',
     notified: false
   };
@@ -39,7 +39,7 @@ title: "Lifestyle/Fun/Family/Pets/Hobbies " , description: "What happens when yo
 title: "Ask a Question", description: " This type of post can be a huge boost to your algorithm. Create engagement by asking for recommendations, tips, advice, suggestions, favorite ___, etc. Engagement is great for your algorithm. Be sure to give engagement too."
 },
 {
-title: "Product/Service Related", description: "When it comes to posting about your products/service, you want to share the benefits of how the product/service has impacted your life. (Don't focus on what your products are made of, or how they are produced). Focus on how the product/service will make your customers feel and why they will be helpful or benefical for them. Interest will follow once people trust you as a reliable and trustworthy expert. Once they trust you, sales will follow." 
+title: "Product/Service Related", description: "When it comes to posting about your products/service, you want to share the benefits of how the product/service has impacted your life. (Don't focus on what your products are made of, or how they are produced). Focus on how the product/service will make your customers feel and why they will be helpful or benefical for them. Interest will follow once people trust you as a reliable and trustworthy expert. Once they trust you, sales will follow."
 },
 {
 title: "Personal Story", description: " When you share a personal story, you can get engagement. The key is to share how you've overcome a challenge and the solution that you found. This is where you can really start to stand out from the crowd. People love stories, especially if they can relate. The goal is to build relationships and connections when sharing your stories. When people find you relatable, they feel they can reach out and ask you questions. They feel connected to you. They feel you can help them with their own struggles and challenges. Imagine people messaging you daily asking for your help in solving their problems!?!?"
@@ -95,4 +95,3 @@ isGroupShown(group) {
 
 
 }
-

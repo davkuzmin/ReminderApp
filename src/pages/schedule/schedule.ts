@@ -59,7 +59,6 @@ export class SchedulePage {
   }
 
   getSocialMediaIcon(type: string) {
-    console.log(type);
     return Utils.getSocialMediaIcon(type);
   }
 

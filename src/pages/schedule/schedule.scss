@@ -1,3 +1,53 @@
 page-schedule {
+  ion-icon {
+    font-size: 2em;
+  }
 
+  ion-icon[aria-label~="facebook"] {
+    color: color($social-media-colors, facebook);
+  }
+
+  ion-icon[aria-label~="twitter"] {
+    color: color($social-media-colors, twitter);
+  }
+
+  ion-icon[aria-label~="googleplus"] {
+    color: color($social-media-colors, google-plus);
+  }
+
+  ion-icon[aria-label~="star"] {
+    color: #D4AF37;
+  }
+
+  $size: .9em;
+  $blur: .15*$size;
+  $inner: .7*$size;
+  $bw: .05*$size;
+  $diam: .3125*$size;
+  $off: .65*$diam;
+
+  ion-icon[aria-label~="instagram"] {
+    position: relative;
+    margin: .5*$size auto 0;
+    width: $size; height: $size;
+    border-radius: 18.5%;
+    background: radial-gradient(circle at 33% 100%, #FED373 4%, #F15245 30%, #D92E7F 62%, #9B36B7 85%, #515ECF);
+
+    &:before, &:after {
+        position: absolute;
+        top: 50%; left: 50%;
+        width: $inner; height: $inner;
+        border: solid $bw #fff;
+        transform: translate(-50%, -50%);
+        content: '';
+    }
+
+    &:before { border-radius: 18.5%; }
+
+    &:after {
+        width: $diam; height: $diam;
+        border-radius: 50%;
+        box-shadow: $off (-$off) 0 (-.8*$off) #fff;
+    }
+  }
 }
