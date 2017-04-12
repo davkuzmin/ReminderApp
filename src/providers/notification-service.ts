@@ -10,8 +10,10 @@ export class NotificationService {
     public notify: LocalNotifications
   ) { }
 
+
   checkNotifications(reminders) {
     this.notify.hasPermission().then(val => {
+      
       reminders.forEach(reminder => {
         this.notify.isScheduled(reminder.id).then((isScheduled) => {
           if (!isScheduled && !this.isOldReminder(reminder)) {
@@ -19,6 +21,7 @@ export class NotificationService {
           }
         });
       });
+      
     }).catch(err => { alert(err)});
   }
 
@@ -29,7 +32,8 @@ export class NotificationService {
 
     this.notify.schedule({
       id: reminder.id,
-      text: 'You have a ' + info + ' at ' + time,
+      // text: 'You have a ' + info + ' at ' + time,
+      text: 'You have a ' + info + ' post at ' + time,
       at: date
     });
   }

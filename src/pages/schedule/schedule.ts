@@ -47,7 +47,7 @@ export class SchedulePage {
           self.currentReminders = self.getCurrentReminders();
           self.pastReminders = Utils.arrayDiff(self.reminders, self.currentReminders);
 
-          self.notifications.checkNotifications(self.reminders);
+         // self.notifications.checkNotifications(self.reminders);
           self.loading.dismiss();
         });
       }
@@ -59,6 +59,7 @@ export class SchedulePage {
   }
 
   getSocialMediaIcon(type: string) {
+    console.log(type);
     return Utils.getSocialMediaIcon(type);
   }
 

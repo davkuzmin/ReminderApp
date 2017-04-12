@@ -20,6 +20,8 @@ export default class Utils {
             return 'logo-twitter';
           case 'facebook':
             return 'logo-facebook';
+          case 'instagram':
+            return 'logo-instagram'
         }
       }
     }
