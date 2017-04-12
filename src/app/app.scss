@@ -32,6 +32,12 @@ p {
   color: white;
 }
 
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
 ion-footer button {
   background-color: white;
   color: color($colors, primary);

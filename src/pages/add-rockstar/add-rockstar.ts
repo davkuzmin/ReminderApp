@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 
+import { ToastService } from '../../providers/toast-service';
 import { GuideService } from '../../providers/guide-service';
 import { UUID } from 'angular2-uuid';
 import Utils from '../../app/utils';
@@ -9,7 +10,7 @@ import Utils from '../../app/utils';
 @Component({
   selector: 'page-add-rockstar',
   templateUrl: 'add-rockstar.html',
-  providers: [GuideService, Camera],
+  providers: [Camera],
 })
 export class AddRockstarPage {
   private user: any;
@@ -29,6 +30,7 @@ export class AddRockstarPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private guideService: GuideService,
+    private toaster: ToastService,
     private camera: Camera,
     private alertCtrl: AlertController,
   ) {
@@ -73,11 +75,15 @@ export class AddRockstarPage {
   }
 
   saveGuide() {
-    this.guide.createdOn = new Date().toISOString();
-    this.guide.authorId = this.user.uid;
+    if (this.guide.base64Image || this.guide.youtubeURL) {
+      this.guide.createdOn = new Date().toISOString();
+      this.guide.authorId = this.user.uid;
 
-    this.guideService.save(this.guide).then(() => {
-      this.navCtrl.pop();
-    });
+      this.guideService.save(this.guide).then(() => {
+        this.navCtrl.pop();
+      });
+    } else {
+      this.toaster.makeToast('Guide must have either a image or video attached');
+    }
   }
 }
