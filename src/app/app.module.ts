@@ -7,13 +7,13 @@ import { RegisterPage } from '../pages/register/register';
 import { HowToPage } from '../pages/how-to/how-to';
 import { SchedulePage } from '../pages/schedule/schedule';
 import { RockstarPage } from '../pages/rockstar/rockstar';
-import { SettingsPage } from '../pages/settings/settings';
 import { AboutPage } from '../pages/about/about';
 import { AddReminder } from '../pages/add-reminder/add-reminder';
 import { ViewReminder } from '../pages/view-reminder/view-reminder';
 import { AddRockstarPage } from '../pages/add-rockstar/add-rockstar';
 import { ViewRockstarPage } from '../pages/view-rockstar/view-rockstar';
 import { ViewCommentsPage } from '../pages/view-comments/view-comments';
+import { SettingsPage } from '../pages/settings/settings';
 
 import { Facebook } from '@ionic-native/facebook';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -43,6 +43,7 @@ import { OffsetISODate } from './pipes'
     AddRockstarPage,
     ViewRockstarPage,
     ViewCommentsPage,
+    SettingsPage,
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -62,6 +63,7 @@ import { OffsetISODate } from './pipes'
     AddRockstarPage,
     ViewRockstarPage,
     ViewCommentsPage,
+    SettingsPage,
   ],
   providers: [
     StatusBar,

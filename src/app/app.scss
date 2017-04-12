@@ -25,9 +25,14 @@ p {
 }
 
 .toolbar-background {
-  background: color($colors, primary)
+  background: color($colors, primary);
 }
 
 .toolbar-title {
   color: white;
+}
+
+ion-footer button {
+  background-color: white;
+  color: color($colors, primary);
 }

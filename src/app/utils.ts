@@ -65,4 +65,16 @@ export default class Utils {
         return 'a long time ago';
       }
     }
+
+    static validateYouTubeUrl(url: string) {
+      let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+      return regExp.test(url);
+    }
+
+    static getYoutubeCharacterCode(url: string) {
+      let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+      let match = url.match(regExp);
+
+      return match[2];
+    }
 }

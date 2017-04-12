@@ -13,6 +13,7 @@ import { SchedulePage } from '../pages/schedule/schedule';
 import { LoginPage } from '../pages/login/login';
 import { RockstarPage } from '../pages/rockstar/rockstar';
 import { AboutPage } from '../pages/about/about';
+import { SettingsPage } from '../pages/settings/settings';
 
 @Component({
   templateUrl: 'app.html'
@@ -68,6 +69,10 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  settings() {
+    this.nav.setRoot(SettingsPage);
   }
 
   logout() {

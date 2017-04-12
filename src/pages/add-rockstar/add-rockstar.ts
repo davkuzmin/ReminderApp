@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 
 import { GuideService } from '../../providers/guide-service';
 import { UUID } from 'angular2-uuid';
+import Utils from '../../app/utils';
 
 @Component({
   selector: 'page-add-rockstar',
@@ -20,7 +21,8 @@ export class AddRockstarPage {
     comments: [],
     likes: 0,
     createdOn: null,
-    base64Image: null
+    base64Image: null,
+    youtubeURL: null,
   };
 
   constructor(
@@ -28,6 +30,7 @@ export class AddRockstarPage {
     public navParams: NavParams,
     private guideService: GuideService,
     private camera: Camera,
+    private alertCtrl: AlertController,
   ) {
     this.user = this.navParams.data;
   }
@@ -39,6 +42,34 @@ export class AddRockstarPage {
     }).then(data => {
       this.guide.base64Image = "data:image/jpeg;base64," + data;
     });
+  }
+
+  getVideo() {
+    let prompt = this.alertCtrl.create({
+      title: 'Add video',
+      message: "Enter a youtube video URL into the field below",
+      inputs: [
+        {
+          name: 'url',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+        },
+        {
+          text: 'Save',
+          handler: url => {
+            if (Utils.validateYouTubeUrl(url)) {
+              this.guide.youtubeURL = url;
+            } else {
+              alert('Invalid URL');
+            }
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   saveGuide() {
