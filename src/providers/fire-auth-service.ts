@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Platform } from 'ionic-angular';
 import { ToastService } from './toast-service';
 
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import firebase from 'firebase';
 
 import 'rxjs/add/operator/map';
@@ -8,14 +10,50 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class FireAuthService {
 
-  constructor(private toaster: ToastService) { }
+  constructor(
+    private toaster: ToastService,
+    private facebook: Facebook,
+    private platform: Platform,
+  ) { }
 
   login(email: string, password: string): firebase.Promise<any> {
-    return firebase.auth().signInWithEmailAndPassword(email, password);
+    return firebase.auth().signInWithEmailAndPassword(email, password).catch(e => {
+      this.toaster.makeToast(e.message);
+    });;
+  }
+
+  loginFacebook() {
+    return this.platform.is('cordova') ? this.loginFacebookCordova() : this.loginFacebookDesktop();
+  }
+
+  loginFacebookDesktop(): firebase.Promise<any> {
+    let provider = new firebase.auth.FacebookAuthProvider();
+
+    return firebase.auth().signInWithPopup(provider).then(function(result) {
+      var token = result.credential.accessToken;
+      var user = result.user;
+
+      //TODO write info to db
+    }).catch(e => {
+      this.toaster.makeToast(e.message);
+    });
+  }
+
+  loginFacebookCordova(): Promise<FacebookLoginResponse> {
+    return this.facebook.login(['email']).then(response => {
+      const facebookCredential = firebase.auth.FacebookAuthProvider
+        .credential(response.authResponse.accessToken);
+
+        return firebase.auth().signInWithCredential(facebookCredential);
+    }).catch((e) => {
+      this.toaster.makeToast(e.message);
+    });
   }
 
   logout(): firebase.Promise<any> {
-    return firebase.auth().signOut();
+    return firebase.auth().signOut().catch(e => {
+      this.toaster.makeToast(e.message);
+    });;
   }
 
   register(email: string, password: string): firebase.Promise<any> {

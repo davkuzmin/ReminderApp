@@ -23,7 +23,7 @@ export class ViewReminder {
 		this.reminder = params.get('reminder');
 	}
 
-	getSocialMediaIcon(type: string) {
+	getSocialMediaIcon(type: string[]) {
     return Utils.getSocialMediaIcon(type);
   }
 
