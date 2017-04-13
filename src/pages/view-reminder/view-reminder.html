@@ -5,7 +5,7 @@
         </ion-title>
     </ion-navbar>
 </ion-header>
-<ion-content padding>
+<!-- <ion-content padding>
     <ion-card>
         <ion-card-content>
             Post Category: <strong>{{reminder.category}}</strong>
@@ -15,6 +15,27 @@
             Social Media: <strong>{{reminder.type}} </strong>
             <ion-icon [name]="getSocialMediaIcon(reminder.type)"></ion-icon>
             <hr> Notes: <strong>{{reminder.notes}}</strong>
+        </ion-card-content>
+    </ion-card>
+    <ion-row justify-content-center>
+      <ion-col align-self-center>
+        <button id="complete" ion-button color="primary" (click)="confirmDelete()" round full>Post Completed</button>
+      </ion-col>
+    </ion-row>
+</ion-content> -->
+<ion-content padding>
+    <ion-card>
+        <ion-item>
+            <ion-avatar item-left>
+                <ion-icon [name]="getSocialMediaIcon(reminder.type)"></ion-icon>
+            </ion-avatar>
+            <h1 item-right> {{reminder.category}} </h1>
+        </ion-item>
+        <ion-card-content>
+            <h3> {{reminder.datetime | offsetISODate | date: 'MMMM d, yyyy h:mm a'}}</h3>
+            <h3> {{reminder.type}}</h3>
+            <h3>Media type: {{reminder.media}}</h3> Notes:
+            <h2> {{reminder.notes}} </h2>
         </ion-card-content>
     </ion-card>
     <ion-row justify-content-center>

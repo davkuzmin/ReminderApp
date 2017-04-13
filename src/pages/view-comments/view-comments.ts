@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { GuideService } from '../../providers/guide-service';
+import { UserService } from '../../providers/user-service';
+
+import firebase from 'firebase';
 
 import Utils from '../../app/utils';
 
@@ -11,8 +14,7 @@ import Utils from '../../app/utils';
 export class ViewCommentsPage {
   private loading;
 
-  private guideId = null;
-  private guideTitle = "";
+  private guide;
   private comments = [];
 
   constructor(
@@ -20,20 +22,61 @@ export class ViewCommentsPage {
     public navParams: NavParams,
     private loadingCtrl: LoadingController,
     private guideService: GuideService,
+    private userService: UserService,
+    private alertCtrl: AlertController,
   ) {
     this.loading = this.loadingCtrl.create({
       content: 'Loading comments...'
     });
     this.loading.present();
 
-    this.guideId = this.navParams.data.guideId;
-    this.guideTitle = this.navParams.data.guideTitle;
+    this.guide = this.navParams.data;
 
-    this.guideService.getComments(this.guideId).then(comments => {
+    firebase.database().ref('guides-data/' + this.guide.id + '/comments').on('value', (snapshot) => {
+      let comments =  Utils.ObjToArray(snapshot.val());
       this.comments = comments;
       this.loading.dismiss();
     });
+
+
   }
 
+  addComment() {
+    let prompt = this.alertCtrl.create({
+      title: 'Comment',
+      message: "Enter your comment below",
+      inputs: [
+        {
+          name: 'comment',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+        },
+        {
+          text: 'Post',
+          handler: res => {
+            this.userService.getCurrentUser().then(user => {
+              let newComment = {
+                text: res.comment,
+                date: new Date().toISOString(),
+                authorId: user.uid,
+                authorName: user.displayName,
+              };
 
+              this.postComment(newComment, this.guide.id);
+            });
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
+  postComment(comment, guideId) {
+    firebase.database().ref('guides-data/' + guideId + '/comments').push(comment).then(() => {
+      //alert('Comment saved');
+    });
+  }
 }

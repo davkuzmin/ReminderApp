@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { AddRockstarPage } from '../add-rockstar/add-rockstar';
 import { ViewRockstarPage } from '../view-rockstar/view-rockstar';
@@ -15,6 +15,8 @@ import firebase from 'firebase';
   providers: [GuideService],
 })
 export class RockstarPage {
+  private loading;
+
   private user: any = null;
   private guides = [];
 
@@ -22,10 +24,17 @@ export class RockstarPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public guideService: GuideService,
+    private loadingCtrl: LoadingController,
   ) {
+    this.loading = this.loadingCtrl.create({
+      content: 'Loading guides...'
+    });
+    this.loading.present();
+
     this.getUser().then(() => {
       this.guideService.getGuides().then((guides) => {
         this.guides = guides;
+        this.loading.dismiss();
       });
     });
   }
@@ -64,6 +73,10 @@ export class RockstarPage {
 
   numLikes(guide) {
     return guide.likes ? guide.likes.length : 0;
+  }
+
+  abbreviatedText(guide) {
+    return guide.content.substring(0, 120) + '...';
   }
 
   timeAgo(guide) {

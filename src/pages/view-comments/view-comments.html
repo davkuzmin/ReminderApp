@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{guideTitle}} Comments</ion-title>
+    <ion-title>{{guide.title}} Comments</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addComment()">
         <ion-icon name="add-circle"></ion-icon>
@@ -13,23 +13,16 @@
 
 
 <ion-content padding>
+  <h3 id="placeholder" *ngIf="comments.length == 0">No Comments</h3>
   <ion-list no-lines>
 
-    <ion-item>
-      <ion-label floating>Title</ion-label>
-      <ion-input [(ngModel)]="title" type="text"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label floating>Review</ion-label>
-      <ion-textarea [(ngModel)]="description"></ion-textarea>
-    </ion-item>
-
-    <ion-item>
-      <ion-range min="0" max="100" pin="true" [(ngModel)]="rating">
-        <ion-icon range-left name="sad"></ion-icon>
-        <ion-icon range-right name="happy"></ion-icon>
-      </ion-range>
+    <ion-item *ngFor="let comment of comments" >
+      <blockquote>
+        {{comment.text}}
+        <footer>
+          -{{comment.authorName}}
+        </footer>
+      </blockquote>
     </ion-item>
 
   </ion-list>

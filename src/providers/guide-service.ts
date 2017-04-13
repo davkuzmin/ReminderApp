@@ -25,10 +25,4 @@ export class GuideService {
   public save(guide): firebase.Promise<any> {
     return firebase.database().ref('guides/' + guide.id).set(guide);
   }
-
-  public getComments(guideId: string): firebase.Promise<any> {
-    return firebase.database().ref('guides/' + guideId + '/comments').once('value').then((snapshot) => {
-      return Utils.ObjToArray(snapshot.val());
-    });
-  }
 }

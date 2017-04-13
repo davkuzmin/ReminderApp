@@ -20,8 +20,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 
+import {Youtube} from '../pipes/youtube';
+
 import { GuideService } from '../providers/guide-service';
 import { FireAuthService } from '../providers/fire-auth-service';
+import { UserService } from '../providers/user-service';
 import { NotificationService } from '../providers/notification-service';
 import { ToastService } from '../providers/toast-service';
 
@@ -44,6 +47,7 @@ import { OffsetISODate } from './pipes'
     ViewRockstarPage,
     ViewCommentsPage,
     SettingsPage,
+    Youtube,
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -74,6 +78,7 @@ import { OffsetISODate } from './pipes'
     NotificationService,
     ToastService,
     GuideService,
+    UserService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

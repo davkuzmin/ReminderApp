@@ -45,7 +45,7 @@ export class FireAuthService {
         .credential(response.authResponse.accessToken);
 
         return firebase.auth().signInWithCredential(facebookCredential).then((args) => {
-          alert(JSON.stringify(args));
+         // alert(JSON.stringify(args));
         });
     }).catch((e) => {
       this.toaster.makeToast(e.message);

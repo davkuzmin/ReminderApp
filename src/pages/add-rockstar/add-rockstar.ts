@@ -75,7 +75,8 @@ export class AddRockstarPage {
   }
 
   saveGuide() {
-    if (this.guide.base64Image || this.guide.youtubeURL) {
+    //if (this.guide.base64Image || this.guide.youtubeURL) {
+    if (this.guide.content) {
       this.guide.createdOn = new Date().toISOString();
       this.guide.authorId = this.user.uid;
 
