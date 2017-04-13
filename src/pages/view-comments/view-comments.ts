@@ -32,13 +32,28 @@ export class ViewCommentsPage {
 
     this.guide = this.navParams.data;
 
-    firebase.database().ref('guides-data/' + this.guide.id + '/comments').on('value', (snapshot) => {
-      let comments =  Utils.ObjToArray(snapshot.val());
-      this.comments = comments;
+    // firebase.database().ref('guides-data/' + this.guide.id + '/comments').on('value', (snapshot) => {
+    //   let comments =  Utils.ObjToArray(snapshot.val());
+    //   this.comments = comments;
+    //   this.loading.dismiss();
+    // });
+
+    firebase.database().ref('guides-data/' + this.guide.id + '/comments').on('child_added', (snapshot) => {
+      let comment = snapshot.val();
+      if (comment) {
+        this.comments.push(comment);
+      }
       this.loading.dismiss();
     });
 
-
+    firebase.database().ref('guides-data/' + this.guide.id + '/comments').on('child_removed', (snapshot) => {
+      let comment = snapshot.val();
+      if (comment) {
+        this.comments = this.comments.filter(o => {
+          return o.id != comment.id;
+        });
+      }
+    });
   }
 
   addComment() {
