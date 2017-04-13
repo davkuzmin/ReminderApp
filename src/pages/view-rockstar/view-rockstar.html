@@ -10,9 +10,7 @@
 
 <ion-content padding>
   <h1>{{guide.title}}</h1>
-  <ion-card *ngIf="guide.youtubeURL">
-    <iframe  width="100%" height="315" [src]="guide.youtubeURL | youtube" frameborder="0" allowfullscreen></iframe>
-  </ion-card>
+  <iframe width="100%" height="315" *ngIf="guide.youtubeURL" [src]="guide.youtubeURL | youtube" frameborder="0" allowfullscreen></iframe>
 
   <img width="100%" height="auto" *ngIf="guide.base64Image" [src]="guide.base64Image">
   <p>{{guide.content}}</p>

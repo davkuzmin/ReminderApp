@@ -17,10 +17,10 @@
   <ion-list no-lines>
 
     <ion-item *ngFor="let comment of comments" >
-      <div>
+      <div class="comment">
         {{comment.text}}
         <footer>
-          -{{comment.authorName}}
+          {{comment.authorName}}
         </footer>
       </div>
     </ion-item>
