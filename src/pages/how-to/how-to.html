@@ -8,11 +8,22 @@
 </ion-header>
 
 <ion-content padding>
-  <h1>Welcome!</h1>
+  <h1>What is Your Brand Builder?</h1>
   <p>
-    This app will help you create valuable content and get you on a consistent schedule of sharing as much (or as little) as you like on your social media platforms. Over the years, I have spent countless hours learning from on line business mentors and coaches. The one thing every coach teaches and preaches is CONSISTENCY of daily actions when it comes to building your on line brand. And there's never been an easier way to build your brand than through social media platforms.
+    YBB is an app designed to help you create valuable content and get you on a consistent schedule of sharing as much (or as little) as you like on your social media platforms. YBB is for those who want to create a solid, authentic and congruent brand that has people knowing, liking and trusting you within a matter of weeks or months. Would that help you grow your business? I believe it would as I am seeing this happen in my business.
   </p>
   <p>
-    What if you could create a solid, authentic and congruent brand that has people knowing, liking and trusting you within a matter of weeks or months? Would that help you grow your business? I believe it would and I have am seeing this happening in my business.
+   Over the years, I have spent countless hours learning from on line business mentors and coaches. The one thing every coach teaches and preaches is CONSISTENCY of daily actions when it comes to building your on line brand. And there's never been an easier way to build your brand than through social media platforms. Most coaches recommend posting on social media 3-5 times a day. Content is king and consistency is queen! Think about this, every like, comment or share is a new person to reach out and connect with! When you have likeable and shareable content, it's easy to connect with people and potentially, if and when the timing is right, share your opportunities.
   </p>
+
+  <ion-list> 
+          <ion-item *ngFor="let g of guides; let i=index " text-wrap 
+          (click)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">
+          <h2 style="font-weight:bold">
+          {{g.title}}
+          </h2>
+          <div *ngIf="isGroupShown(i)">{{g.description}}</div>
+          <ion-icon color="primary" item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+          </ion-item>
+          </ion-list>
 </ion-content>
