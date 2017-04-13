@@ -39,7 +39,7 @@ export class SchedulePage {
       this.currentReminders = this.getCurrentReminders();
       this.pastReminders = Utils.arrayDiff(this.reminders, this.currentReminders);
 
-      this.notifications.checkNotifications(this.reminders);
+     // this.notifications.checkNotifications(this.reminders);
       this.loading.dismiss();
     });
   }
