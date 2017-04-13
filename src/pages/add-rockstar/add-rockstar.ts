@@ -62,7 +62,8 @@ export class AddRockstarPage {
         {
           text: 'Save',
           handler: res => {
-            this.guide.youtubeURL = res.url;
+            this.guide.youtubeURL = Utils.getYoutubeEmbedLink(res.url);
+
           }
         }
       ]
