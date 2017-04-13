@@ -15,6 +15,10 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+
+* {
+  font-family: "helvetica";
+}
 ion-navbar ion-icon {
   font-size: 1.8em;
   color: white;
@@ -30,9 +34,7 @@ p {
 
 .toolbar-title {
   color: white;
-  font-family: "helvetica";
   font-weight: bold;
-  font-size: 1.8em;
 }
 
 .center {
