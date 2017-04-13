@@ -36,13 +36,21 @@ export class GuideService {
         guidesData[index].comments = Utils.ObjToArray(data.comments);
       });
 
-      return guides.map((guide, index) => {
-        return Object.assign(guide, guidesData[index]);
+      return guides.map((guide) => {
+        let data = guidesData.find(o => {
+          return o.id == guide.id;
+        }) || {};
+
+        return Object.assign(data, guide);
       });
     });
   }
 
   public save(guide): firebase.Promise<any> {
-    return firebase.database().ref('guides/' + guide.id).set(guide);
+    return firebase.database().ref('guides/' + guide.id).set(guide).then(() => {
+      return firebase.database().ref('guides-data/' + guide.id).set({
+        id: guide.id
+      });
+    });
   }
 }
