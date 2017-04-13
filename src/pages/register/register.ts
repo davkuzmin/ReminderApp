@@ -11,8 +11,7 @@ import firebase from 'firebase';
   templateUrl: 'register.html'
 })
 export class RegisterPage {
-  private firstName: string = "";
-  private lastName: string = "";
+  private displayName: string = "";
   public email: string = "";
   public password: string = "";
 
@@ -24,6 +23,6 @@ export class RegisterPage {
   }
 
   register() {
-    this.fireAuth.register(this.email, this.password);
+    this.fireAuth.register(this.email, this.password, this.displayName);
   }
 }
