@@ -1,6 +1,5 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{guide.title}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="viewComments(guide)">
         <ion-icon name="chatbubbles"></ion-icon>
@@ -10,16 +9,12 @@
 </ion-header>
 
 <ion-content padding>
+  <h1>{{guide.title}}</h1>
   <ion-card *ngIf="guide.youtubeURL">
     <iframe  width="100%" height="315" [src]="guide.youtubeURL | youtube" frameborder="0" allowfullscreen></iframe>
   </ion-card>
 
-  <ion-card *ngIf="guide.base64Image">
-    <div id="img-container">
-      <img width="100%" height="315" [src]="guide.base64Image | youtube">
-    </div>
-  </ion-card>
-
+  <img width="100%" height="auto" *ngIf="guide.base64Image" [src]="guide.base64Image">
   <p>{{guide.content}}</p>
 
 </ion-content>

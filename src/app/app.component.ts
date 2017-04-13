@@ -74,10 +74,4 @@ export class MyApp {
   settings() {
     this.nav.setRoot(SettingsPage);
   }
-
-  logout() {
-    this.fireAuth.logout().then(res => {
-      this.nav.setRoot(LoginPage);
-    });
-  }
 }

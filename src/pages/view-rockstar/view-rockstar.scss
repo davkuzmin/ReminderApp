@@ -1,11 +1,14 @@
 page-view-rockstar {
-  #img-container {
-    width:300px;
-    height:300px;
-    overflow:hidden;
-    margin: auto;
+  img {
+    height: auto;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
-  #img-container img {
-    min-width:100%;
+
+  h1 {
+    text-align: center;
+    padding: 10px;
+    color: color($colors, primary);
+    font-size: 30px;
+    font-weight: bold;
   }
 }
