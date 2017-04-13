@@ -11,9 +11,10 @@ export class NotificationService {
   ) { }
 
 
+
   checkNotifications(reminders) {
     this.notify.hasPermission().then(val => {
-      
+ 
       reminders.forEach(reminder => {
         this.notify.isScheduled(reminder.id).then((isScheduled) => {
           if (!isScheduled && !this.isOldReminder(reminder)) {
