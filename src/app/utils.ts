@@ -87,4 +87,9 @@ export default class Utils {
 
       return match[2];
     }
+
+    static getYoutubeEmbedLink(link: string) {
+      let id = link.split('v=')[1];
+      return 'https://www.youtube.com/embed/' + id;
+    }
 }

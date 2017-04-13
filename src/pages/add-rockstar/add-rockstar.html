@@ -25,6 +25,11 @@
       <img width="100px" height="100px" src="{{guide.base64Image}}" />
     </ion-row>
   </ion-item>
+  <ion-item *ngIf="guide.youtubeURL">
+    <ion-row justify-content-center>
+      <iframe width="100%" height="315" *ngIf="guide.youtubeURL" [src]="guide.youtubeURL | youtube" frameborder="0" allowfullscreen></iframe>
+    </ion-row>
+  </ion-item>
 
 </ion-content>
 

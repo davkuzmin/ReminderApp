@@ -61,12 +61,8 @@ export class AddRockstarPage {
         },
         {
           text: 'Save',
-          handler: url => {
-            if (Utils.validateYouTubeUrl(url)) {
-              this.guide.youtubeURL = url;
-            } else {
-              alert('Invalid URL');
-            }
+          handler: res => {
+            this.guide.youtubeURL = res.url;
           }
         }
       ]
