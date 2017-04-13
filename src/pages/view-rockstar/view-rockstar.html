@@ -15,4 +15,12 @@
   <img width="100%" height="auto" *ngIf="guide.base64Image" [src]="guide.base64Image">
   <p>{{guide.content}}</p>
 
+  <ion-row>
+    <ion-col>
+      <button ion-button round full icon-left (click)="logout()">
+        <ion-icon name="thumbs-up"></ion-icon>
+        Like
+      </button>
+    </ion-col>
+  </ion-row>
 </ion-content>

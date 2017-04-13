@@ -15,7 +15,7 @@ export class ViewCommentsPage {
   private loading;
 
   private guide;
-  private comments = [];
+  private comments: Array<any> = [];
 
   constructor(
     public navCtrl: NavController,
@@ -25,6 +25,7 @@ export class ViewCommentsPage {
     private userService: UserService,
     private alertCtrl: AlertController,
   ) {
+    let self = this;
     this.loading = this.loadingCtrl.create({
       content: 'Loading comments...'
     });
@@ -32,28 +33,28 @@ export class ViewCommentsPage {
 
     this.guide = this.navParams.data;
 
-    // firebase.database().ref('guides-data/' + this.guide.id + '/comments').on('value', (snapshot) => {
-    //   let comments =  Utils.ObjToArray(snapshot.val());
-    //   this.comments = comments;
-    //   this.loading.dismiss();
-    // });
-
-    firebase.database().ref('guides-data/' + this.guide.id + '/comments').on('child_added', (snapshot) => {
-      let comment = snapshot.val();
-      if (comment) {
-        this.comments.push(comment);
-      }
+    firebase.database().ref('guides-data/' + this.guide.id + '/comments').on('value', (snapshot) => {
+      let comments =  Utils.ObjToArray(snapshot.val());
+      this.comments = comments;
       this.loading.dismiss();
     });
 
-    firebase.database().ref('guides-data/' + this.guide.id + '/comments').on('child_removed', (snapshot) => {
-      let comment = snapshot.val();
-      if (comment) {
-        this.comments = this.comments.filter(o => {
-          return o.id != comment.id;
-        });
-      }
-    });
+    // firebase.database().ref('guides-data/' + this.guide.id + '/comments').on('child_added', (snapshot) => {
+    //   let comment = snapshot.val();
+    //   if (comment) {
+    //     self.comments.push(comment);
+    //   }
+    //   self.loading.dismiss();
+    // });
+    //
+    // firebase.database().ref('guides-data/' + this.guide.id + '/comments').on('child_removed', (snapshot) => {
+    //   let comment = snapshot.val();
+    //   if (comment) {
+    //     this.comments = this.comments.filter(o => {
+    //       return o.id != comment.id;
+    //     });
+    //   }
+    // });
   }
 
   addComment() {
