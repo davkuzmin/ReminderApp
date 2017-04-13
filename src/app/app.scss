@@ -43,3 +43,7 @@ ion-footer button {
   background-color: white;
   color: color($colors, primary);
 }
+
+.background, .background .pane, .background .item, .background .item-complex .item-content {
+    background-color: color($colors, secondary-transparent);
+}

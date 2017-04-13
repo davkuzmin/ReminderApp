@@ -57,12 +57,6 @@ export class SchedulePage {
     return Utils.getSocialMediaIcon(type);
   }
 
-  viewReminder(reminder) {
-    if (reminder.notes) {
-      alert(reminder.notes);
-    }
-  }
-
   getCurrentReminders() {
     let now = new Date();
     return this.reminders.filter(reminder => {

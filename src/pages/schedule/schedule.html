@@ -19,13 +19,13 @@
       Scheduled Reminders
     </ion-list-header>
     <ion-item-sliding *ngFor="let reminder of currentReminders">
-      <ion-item (click)="viewReminder(reminder)">
+      <ion-item>
         <ion-avatar item-left>
           <ion-icon [name]="getSocialMediaIcon(reminder.type)"></ion-icon>
         </ion-avatar>
         <h2>{{reminder.category}}</h2>
         <h3>{{reminder.datetime | offsetISODate | date: 'MMMM d, yyyy h:mm a'}}</h3>
-        <p>{{reminder.notes}}</p>
+        <p class="show-all" onclick="javascript: this.classList.toggle('show-all');">{{reminder.notes}}</p>
       </ion-item>
       <ion-item-options side="right">
         <button ion-button (click)="delete(reminder)">
@@ -38,13 +38,13 @@
       Past Reminders
     </ion-list-header>
     <ion-item-sliding *ngFor="let reminder of pastReminders">
-      <ion-item (click)="viewReminder(reminder)">
+      <ion-item>
         <ion-avatar item-left>
           <ion-icon [name]="getSocialMediaIcon(reminder.type)"></ion-icon>
         </ion-avatar>
         <h2>{{reminder.category}}</h2>
         <h3>{{reminder.datetime | offsetISODate | date: 'MMMM d, yyyy h:mm a'}}</h3>
-        <p>{{reminder.notes}}</p>
+        <p onclick="javascript: this.classList.toggle('show-all');">{{reminder.notes}}</p>
       </ion-item>
       <ion-item-options side="right">
         <button ion-button (click)="delete(reminder)">
