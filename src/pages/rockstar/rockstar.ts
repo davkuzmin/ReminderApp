@@ -30,13 +30,6 @@ export class RockstarPage {
       content: 'Loading guides...'
     });
     this.loading.present();
-
-    this.getUser().then(() => {
-      this.guideService.getGuides().then((guides) => {
-        this.guides = guides;
-        this.loading.dismiss();
-      });
-    });
   }
 
   ionViewWillEnter() {
@@ -47,6 +40,7 @@ export class RockstarPage {
     return this.getUser().then(() => {
       this.guideService.getGuides().then((guides) => {
         this.guides = guides;
+        this.loading.dismiss();
       });
     });
   }

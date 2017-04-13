@@ -1,5 +1,4 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>{{guide.title}}</ion-title>
     <ion-buttons end>
@@ -8,20 +7,19 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-
-
 </ion-header>
+
 <ion-content padding>
-    <ion-card *ngIf="guide.youtubeURL">
-        <iframe  width="100%" height="315" [src]="guide.youtubeURL | youtube" frameborder="0" allowfullscreen></iframe>
-    </ion-card>
+  <ion-card *ngIf="guide.youtubeURL">
+    <iframe  width="100%" height="315" [src]="guide.youtubeURL | youtube" frameborder="0" allowfullscreen></iframe>
+  </ion-card>
 
-    <ion-card *ngIf="guide.base64Image">
-        <img  width="100%" height="315" [src]="guide.base64Image | youtube" >
-    </ion-card>
+  <ion-card *ngIf="guide.base64Image">
+    <div id="img-container">
+      <img width="100%" height="315" [src]="guide.base64Image | youtube">
+    </div>
+  </ion-card>
 
-    <p>{{guide.content}}</p>
-
-
+  <p>{{guide.content}}</p>
 
 </ion-content>

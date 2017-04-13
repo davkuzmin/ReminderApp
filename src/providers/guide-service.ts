@@ -17,8 +17,28 @@ export class GuideService {
   }
 
   public getGuides(): firebase.Promise<any> {
-    return firebase.database().ref('guides').once('value').then(snapshot => {
-      return Utils.ObjToArray(snapshot.val());
+    let guidesPromise = new Promise((resolve, reject) => {
+      resolve(firebase.database().ref('guides').once('value').then(snapshot => {
+          return Utils.ObjToArray(snapshot.val());
+      }));
+    });
+
+    let guidesDataPromise = new Promise((resolve, reject) => {
+      resolve(firebase.database().ref('guides-data').once('value').then(snapshot => {
+          return Utils.ObjToArray(snapshot.val());
+      }));
+    });
+
+    return Promise.all([guidesPromise, guidesDataPromise]).then((data) => {
+      let guides = Utils.ObjToArray(data[0]);
+      let guidesData = Utils.ObjToArray(data[1]);
+      guidesData.forEach((data, index) => {
+        guidesData[index].comments = Utils.ObjToArray(data.comments);
+      });
+
+      return guides.map((guide, index) => {
+        return Object.assign(guide, guidesData[index]);
+      });
     });
   }
 
