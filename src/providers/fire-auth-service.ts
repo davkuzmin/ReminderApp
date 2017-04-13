@@ -40,13 +40,28 @@ export class FireAuthService {
   }
 
   loginFacebookCordova(): Promise<FacebookLoginResponse> {
-    return this.facebook.login(['email']).then(response => {
+    return this.facebook.login(['public_profile', 'email']).then(response => {
       const facebookCredential = firebase.auth.FacebookAuthProvider
         .credential(response.authResponse.accessToken);
 
-        return firebase.auth().signInWithCredential(facebookCredential).then((args) => {
-          //alert(JSON.stringify(args));
-        });
+      return facebookCredential;
+    }).then((facebookCredential) => {
+      return firebase.auth().signInWithCredential(facebookCredential).then((args) => {
+        return args.uid;
+      });
+    }).then((uid) => {
+      return this.facebook.api('/me?fields=name,email,picture.type(normal)',['public_profile', 'email']).then(user => {
+        user.uid = uid;
+        return user;
+      });
+    }).then(userInfo => {
+      let user = {
+        uid: userInfo.uid,
+        displayName: userInfo.name,
+        photoURL: userInfo.picture.data.url,
+      };
+
+      return firebase.database().ref('users/' + user.uid).update(user);
     }).catch((e) => {
       this.toaster.makeToast(e.message);
     });
