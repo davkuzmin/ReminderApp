@@ -1,27 +1,9 @@
 page-view-reminder {
-    .content {
-        color: #D4AF37;
-    }
-    .button {
-        font-weight:bold;
+
+    ion-icon {
+        font-size: 4em;
     }
 
-    .item h1 {
-        font-weight: bold;
-        font-size: 1.75em;
-        color: #D4AF37;
-    }
-    .card-content {
-        font-weight: bold;
-        font-size: 1.5em;
-    }
-    .card-content h3 {
-    	font-size: 20px;
-    	margin-bottom: 10px;
-    }
-    ion-icon {
-        font-size: 3em;
-    }
     ion-icon[aria-label~="facebook"] {
         color: color($social-media-colors, facebook);
     }

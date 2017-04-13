@@ -13,29 +13,44 @@
 </ion-header>
 
 <ion-content>
+  <h3 id="placeholder" *ngIf="reminders.length == 0">No Reminders</h3>
   <ion-list>
     <ion-list-header *ngIf="currentReminders.length > 0">
       Scheduled Reminders
     </ion-list-header>
-    <ion-item *ngFor="let reminder of currentReminders" (click)="viewReminder(reminder)">
-      <ion-avatar item-left>
-        <ion-icon [name]="getSocialMediaIcon(reminder.type)"></ion-icon>
-      </ion-avatar>
-      <h2>{{reminder.category}}</h2>
-      <h3>{{reminder.datetime | offsetISODate | date: 'MMMM d, yyyy h:mm a'}}</h3>
-      <p>{{reminder.notes}}</p>
-    </ion-item>
+    <ion-item-sliding *ngFor="let reminder of currentReminders">
+      <ion-item (click)="viewReminder(reminder)">
+        <ion-avatar item-left>
+          <ion-icon [name]="getSocialMediaIcon(reminder.type)"></ion-icon>
+        </ion-avatar>
+        <h2>{{reminder.category}}</h2>
+        <h3>{{reminder.datetime | offsetISODate | date: 'MMMM d, yyyy h:mm a'}}</h3>
+        <p>{{reminder.notes}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button (click)="delete(reminder)">
+           <ion-icon class="delete-icon" name="checkmark"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
 
     <ion-list-header *ngIf="pastReminders.length > 0">
       Past Reminders
     </ion-list-header>
-    <ion-item *ngFor="let reminder of pastReminders" (click)="viewReminder(reminder)">
-      <ion-avatar item-left>
-        <ion-icon [name]="getSocialMediaIcon(reminder.type)"></ion-icon>
-      </ion-avatar>
-      <h2>{{reminder.category}}</h2>
-      <h3>{{reminder.datetime | offsetISODate | date: 'MMMM d, yyyy h:mm a'}}</h3>
-      <p>{{reminder.notes}}</p>
-    </ion-item>
+    <ion-item-sliding *ngFor="let reminder of pastReminders">
+      <ion-item (click)="viewReminder(reminder)">
+        <ion-avatar item-left>
+          <ion-icon [name]="getSocialMediaIcon(reminder.type)"></ion-icon>
+        </ion-avatar>
+        <h2>{{reminder.category}}</h2>
+        <h3>{{reminder.datetime | offsetISODate | date: 'MMMM d, yyyy h:mm a'}}</h3>
+        <p>{{reminder.notes}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button (click)="delete(reminder)">
+           <ion-icon class="delete-icon" name="checkmark"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>

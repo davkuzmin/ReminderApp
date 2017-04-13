@@ -31,26 +31,16 @@ export class SchedulePage {
       content: 'Loading reminders...'
     });
     this.loading.present();
-  }
 
-  ionViewWillEnter() {
-    this.updateReminders();
-  }
+    let user = firebase.auth().currentUser;
 
-  updateReminders() {
-    var self = this;
+    firebase.database().ref('users/' + user.uid + '/reminders').on('value', (snapshot) => {
+      this.reminders = Utils.ObjToArray(snapshot.val());
+      this.currentReminders = this.getCurrentReminders();
+      this.pastReminders = Utils.arrayDiff(this.reminders, this.currentReminders);
 
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        firebase.database().ref('users/' + user.uid + '/reminders').once('value').then((snapshot) => {
-          self.reminders = Utils.ObjToArray(snapshot.val());
-          self.currentReminders = self.getCurrentReminders();
-          self.pastReminders = Utils.arrayDiff(self.reminders, self.currentReminders);
-
-         // self.notifications.checkNotifications(self.reminders);
-          self.loading.dismiss();
-        });
-      }
+      this.notifications.checkNotifications(this.reminders);
+      this.loading.dismiss();
     });
   }
 
@@ -58,14 +48,19 @@ export class SchedulePage {
     this.navCtrl.push(AddReminder);
   }
 
+  delete(reminder) {
+    let user = firebase.auth().currentUser;
+    firebase.database().ref('users/' + user.uid + '/reminders/' + reminder.id).remove();
+  }
+
   getSocialMediaIcon(type: string[]) {
     return Utils.getSocialMediaIcon(type);
   }
 
   viewReminder(reminder) {
-    this.navCtrl.push(ViewReminder, {
-      reminder: reminder
-    });
+    if (reminder.notes) {
+      alert(reminder.notes);
+    }
   }
 
   getCurrentReminders() {

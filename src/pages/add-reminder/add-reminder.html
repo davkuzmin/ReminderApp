@@ -8,6 +8,7 @@
         </ion-buttons>
     </ion-navbar>
 </ion-header>
+
 <ion-content padding>
     <ion-slides pager="true">
         <ion-slide>
@@ -25,7 +26,7 @@
               </ion-item>
               <ion-item>
                   <ion-label>Time</ion-label>
-                  <ion-datetime displayFormat="h:mm A" pickerFormat="h mm ss A" [(ngModel)]="reminder.datetime"></ion-datetime>
+                  <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="reminder.datetime"></ion-datetime>
               </ion-item>
               <ion-item>
                   <ion-label>Social Media</ion-label>
@@ -48,10 +49,10 @@
         </ion-slide>
         <ion-slide>
           <h1 style="color:primary, font-style:helvetica, font-weight: bold">
-        Guides to Posting 
+        Guides to Posting
         </h1>
-          <ion-list> 
-          <ion-item *ngFor="let g of guides; let i=index " text-wrap 
+          <ion-list>
+          <ion-item *ngFor="let g of guides; let i=index " text-wrap
           (click)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">
           <h2 style="font-weight:bold">
           {{g.title}}
@@ -63,4 +64,3 @@
         </ion-slide>
     </ion-slides>
 </ion-content>
-              

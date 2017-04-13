@@ -28,7 +28,6 @@ export class AddReminder {
   };
 
 guides = [
-
 {
 title: "Inspirational/Motivational", description: "Most people will react positively to an inspirational/motivational post. The key is to put your personal spin on it. Share a few lines of how YOU make meaning out of the post (if you're sharing a quote or meme). You can find inspiration/motivation anywhere. You have to keep your eyes and ears open to it! Chances are you will get some good engagement on this type of post."
 },
@@ -91,6 +90,10 @@ title: "Business Related", description: "Instead of sharing your business opport
 isGroupShown(group) {
     return this.shownGroup === group;
 };
+
+getSocialMediaIcon(type: string[]) {
+  return Utils.getSocialMediaIcon(type);
+}
 
 
 

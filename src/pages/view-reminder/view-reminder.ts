@@ -27,6 +27,10 @@ export class ViewReminder {
     return Utils.getSocialMediaIcon(type);
   }
 
+	formatDate() {
+		return Utils.formatDate(this.reminder.datetime);
+	}
+
 	confirmDelete() {
 	  let alert = this.alertCtrl.create({
 	    title: 'Confirm',
