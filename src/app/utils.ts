@@ -88,8 +88,17 @@ export default class Utils {
       return match[2];
     }
 
-    static getYoutubeEmbedLink(link: string) {
-      let id = link.split('v=')[1];
-      return 'https://www.youtube.com/embed/' + id;
+    static getYoutubeEmbedLink(url: string): string {
+      return 'https://www.youtube.com/embed/' + Utils.getYoutubeVideoId(url);
+    }
+
+    static getYoutubeVideoId(link: string): string {
+        let url = link.replace(/(>|<)/gi,'').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+        if(url[2] !== undefined) {
+          return url[2].split(/[^0-9a-z_\-]/i)[0];
+        }
+        else {
+          return url[0];
+        }
     }
 }
