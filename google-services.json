@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "554293570088",
+    "firebase_url": "https://reminderapp-bb5a7.firebaseio.com",
+    "project_id": "reminderapp-bb5a7",
+    "storage_bucket": "reminderapp-bb5a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554293570088:android:7b3b8c1d7e42aa1f",
+        "android_client_info": {
+          "package_name": "com.ionicframework.yourbrandbuilder373444"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554293570088-1air59i2ok4lmgge7en59gsvvmqua0rk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcAQgnZ_SANOdG629IIktpH7HsPniwq0w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
