@@ -27,9 +27,10 @@ export default class Utils {
     }
 
     //returns current datetime in ISOstring format offset for the current timezone
-    static getOffsetISOString() {
+    static getOffsetISOString(date?: Date) {
+      let milliseconds = date ? date.getTime() : Date.now();
       var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
-      return (new Date(Date.now() - tzoffset)).toISOString().slice(0,-1);
+      return (new Date(milliseconds - tzoffset)).toISOString().slice(0,-1);
     }
 
     //returns Date object from the resulting string of the getOffsetISOString function
@@ -81,13 +82,6 @@ export default class Utils {
       return regExp.test(url);
     }
 
-    static getYoutubeCharacterCode(url: string) {
-      let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
-      let match = url.match(regExp);
-
-      return match[2];
-    }
-
     static getYoutubeEmbedLink(url: string): string {
       return 'https://www.youtube.com/embed/' + Utils.getYoutubeVideoId(url);
     }
@@ -100,5 +94,9 @@ export default class Utils {
         else {
           return url[0];
         }
+    }
+
+    static getNumberFromString(str: string): number {
+      return parseInt(str.match(/\d+/g).join(''));
     }
 }

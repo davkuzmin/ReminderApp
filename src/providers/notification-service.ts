@@ -6,40 +6,26 @@ import { LocalNotifications } from '@ionic-native/local-notifications'
 @Injectable()
 export class NotificationService {
 
-  constructor(
-    public notify: LocalNotifications
-  ) { }
+  constructor(public notify: LocalNotifications) { }
 
-
-
-  checkNotifications(reminders) {
-    this.notify.hasPermission().then(val => {
- 
-      reminders.forEach(reminder => {
-        this.notify.isScheduled(reminder.id).then((isScheduled) => {
-          if (!isScheduled && !this.isOldReminder(reminder)) {
-            this.scheduleNotification(reminder);
-          }
-        });
-      });
-      
-    }).catch(err => { alert(err)});
-  }
-
+  //github.com/katzer/cordova-plugin-local-notifications/wiki/04.-Scheduling
   scheduleNotification(reminder) {
     let info = reminder.category + ' ' + reminder.type
     let date = Utils.getDateFromOffsetISOString(reminder.datetime);
     let time = Utils.getTimeStringFromDate(date);
 
     this.notify.schedule({
-      id: reminder.id,
-      // text: 'You have a ' + info + ' at ' + time,
+      id: Utils.getNumberFromString(reminder.id),
+      title: reminder.type + ' Post',
       text: 'You have a ' + info + ' post at ' + time,
-      at: date
+      at: date,
+      every: reminder.repeat ? reminder.repeat : 0
     });
   }
 
-  isOldReminder(reminder): boolean {
-    return Utils.getDateFromOffsetISOString(reminder.datetime) < new Date();
+  onNotificationTap(scope, callback: (reminder) => any): void {
+    this.notify.on('click', reminder => {
+      callback.call(scope, reminder);
+    });
   }
 }

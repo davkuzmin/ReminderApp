@@ -24,7 +24,8 @@ export class AddReminder {
     type: [this.types[0]],
     media: this.medias[0],
     notes: '',
-    notified: false
+    notified: false,
+    repeat: 0,
   };
 
 guides = [
@@ -55,7 +56,9 @@ title: "Business Related", description: "Instead of sharing your business opport
     private notifications: NotificationService,
     private toaster: ToastService,
   ) {
-    this.reminder.datetime = Utils.getOffsetISOString();
+    //5 minutes from now
+    let date = new Date(new Date().setMinutes(new Date().getMinutes() + 5));
+    this.reminder.datetime = Utils.getOffsetISOString(date);
   }
 
   saveReminder() {

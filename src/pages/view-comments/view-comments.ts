@@ -73,16 +73,22 @@ export class ViewCommentsPage {
         {
           text: 'Post',
           handler: res => {
-            this.userService.getCurrentUser().then(user => {
-              let newComment = {
-                text: res.comment,
-                date: new Date().toISOString(),
-                authorId: user.uid,
-                authorName: user.displayName,
-              };
+            let comment = res.comment.trim();
+            
+            if (comment) {
+              this.userService.getCurrentUser().then(user => {
+                let newComment = {
+                  text: comment,
+                  date: new Date().toISOString(),
+                  authorId: user.uid,
+                  authorName: user.displayName,
+                };
 
-              this.postComment(newComment, this.guide.id);
-            });
+                this.postComment(newComment, this.guide.id);
+              });
+            } else {
+              alert('Cannot post empty comment!');
+            }
           }
         }
       ]

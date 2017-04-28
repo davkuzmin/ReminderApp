@@ -39,7 +39,8 @@ export class SchedulePage {
       this.currentReminders = this.getCurrentReminders();
       this.pastReminders = Utils.arrayDiff(this.reminders, this.currentReminders);
 
-     // this.notifications.checkNotifications(this.reminders);
+      this.notifications.onNotificationTap(this, this.viewReminder);
+
       this.loading.dismiss();
     });
   }
@@ -62,5 +63,10 @@ export class SchedulePage {
     return this.reminders.filter(reminder => {
       return Utils.getDateFromOffsetISOString(reminder.datetime) >= now;
     });
+  }
+
+  viewReminder(reminder) {
+    //something going wrong here
+    this.navCtrl.push(ViewReminder, { 'reminder': reminder });
   }
 }
