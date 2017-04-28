@@ -15,6 +15,7 @@ import { RockstarPage } from '../pages/rockstar/rockstar';
 import { AboutPage } from '../pages/about/about';
 import { SettingsPage } from '../pages/settings/settings';
 
+declare var FCMPlugin;
 @Component({
   templateUrl: 'app.html'
 })
@@ -62,6 +63,14 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      FCMPlugin.onNotification(function(data){
+        if(data.wasTapped){
+          alert('App closed: ' + JSON.stringify(data));
+        } else {
+          alert('App open: ' + JSON.stringify(data));
+        }
+      }, function(msg) {alert(JSON.stringify(msg))});
     });
   }
 
