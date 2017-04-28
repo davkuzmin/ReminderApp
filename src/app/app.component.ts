@@ -64,13 +64,13 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      FCMPlugin.onNotification(function(data){
+      FCMPlugin.onNotification(data => {
         if(data.wasTapped){
           alert('App closed: ' + JSON.stringify(data));
         } else {
           alert('App open: ' + JSON.stringify(data));
         }
-      }, function(msg) {alert(JSON.stringify(msg))});
+      }, msg => alert(JSON.stringify(msg)));
     });
   }
 
