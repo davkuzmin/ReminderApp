@@ -5,7 +5,7 @@
     </button>
     <ion-title>Scheduling</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="addReminder()">
+      <button ion-button icon-only (click)="add()">
         <ion-icon name="add-circle"></ion-icon>
       </button>
     </ion-buttons>
@@ -19,17 +19,20 @@
       Scheduled Reminders
     </ion-list-header>
     <ion-item-sliding *ngFor="let reminder of currentReminders">
-      <ion-item>
+      <ion-item (click)="viewReminder(reminder)">
         <ion-avatar item-left>
           <ion-icon [name]="getSocialMediaIcon(reminder.type)"></ion-icon>
         </ion-avatar>
         <h2>{{reminder.category}}</h2>
         <h3>{{reminder.datetime | offsetISODate | date: 'MMMM d, yyyy h:mm a'}}</h3>
-        <p class="show-all" onclick="javascript: this.classList.toggle('show-all');">{{reminder.notes}}</p>
+        <p>{{reminder.notes}}</p>
       </ion-item>
       <ion-item-options side="right">
+        <button ion-button class="slide-button" (click)="edit(reminder)">
+           <ion-icon class="slide-icon" name="md-create"></ion-icon>
+        </button>
         <button ion-button (click)="delete(reminder)">
-           <ion-icon class="delete-icon" name="checkmark"></ion-icon>
+           <ion-icon class="slide-icon" name="trash"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>
@@ -38,17 +41,20 @@
       Past Reminders
     </ion-list-header>
     <ion-item-sliding *ngFor="let reminder of pastReminders">
-      <ion-item>
+      <ion-item (click)="viewReminder(reminder)">
         <ion-avatar item-left>
           <ion-icon [name]="getSocialMediaIcon(reminder.type)"></ion-icon>
         </ion-avatar>
         <h2>{{reminder.category}}</h2>
         <h3>{{reminder.datetime | offsetISODate | date: 'MMMM d, yyyy h:mm a'}}</h3>
-        <p onclick="javascript: this.classList.toggle('show-all');">{{reminder.notes}}</p>
+        <p>{{reminder.notes}}</p>
       </ion-item>
       <ion-item-options side="right">
+        <button ion-button class="slide-button" (click)="edit(reminder)">
+           <ion-icon class="slide-icon" name="md-create"></ion-icon>
+        </button>
         <button ion-button (click)="delete(reminder)">
-           <ion-icon class="delete-icon" name="checkmark"></ion-icon>
+           <ion-icon class="slide-icon" name="trash"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>

@@ -39,14 +39,18 @@ export class SchedulePage {
       this.currentReminders = this.getCurrentReminders();
       this.pastReminders = Utils.arrayDiff(this.reminders, this.currentReminders);
 
-      this.notifications.onNotificationTap(this, this.viewReminder);
+      //this.notifications.onNotificationTap(this, this.viewReminder);
 
       this.loading.dismiss();
     });
   }
 
-  addReminder() {
+  add() {
     this.navCtrl.push(AddReminder);
+  }
+
+  edit(reminder) {
+    this.navCtrl.push(AddReminder, { 'reminder': reminder });
   }
 
   delete(reminder) {
@@ -61,7 +65,7 @@ export class SchedulePage {
   getCurrentReminders() {
     let now = new Date();
     return this.reminders.filter(reminder => {
-      return Utils.getDateFromOffsetISOString(reminder.datetime) >= now;
+      return Utils.getDateFromOffsetISOString(reminder.datetime) >= now || reminder.repeat != 0;
     });
   }
 

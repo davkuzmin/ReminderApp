@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, NavController, Platform } from 'ionic-angular';
+import { Nav, NavController, Platform, AlertController } from 'ionic-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -29,7 +29,8 @@ export class MyApp {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    private fireAuth: FireAuthService
+    private fireAuth: FireAuthService,
+    private alertCtrl: AlertController,
   ) {
     this.initializeApp();
 
@@ -64,13 +65,28 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      FCMPlugin.onNotification(data => {
-        if(data.wasTapped){
-          alert('App closed: ' + JSON.stringify(data));
-        } else {
-          alert('App open: ' + JSON.stringify(data));
-        }
-      }, msg => alert(JSON.stringify(msg)));
+      if (this.platform.is('cordova')) {
+        FCMPlugin.onNotification((data, a, b, c) => {
+          if (data.wasTapped) {
+            alert('App closed: ' + JSON.stringify(data));
+            this.nav.push(RockstarPage);
+          } else {
+            this.alertCtrl.create({
+              title: 'New Guide Posted',
+              message: 'Would you like to view Rockstar guides?',
+              buttons: [{
+                text: 'Ignore',
+                role: 'cancel'
+              }, {
+                text: 'View',
+                handler: () => {
+                  this.nav.push(RockstarPage);
+                }
+              }]
+            }).present();
+          }
+        });
+      }
     });
   }
 

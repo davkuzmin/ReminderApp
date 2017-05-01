@@ -14,8 +14,12 @@ page-schedule {
     font-size: 3em;
   }
 
-  .delete-icon {
-    padding-bottom: 0;
+  .slide-icon {
+    padding-bottom: 0 !important;
+  }
+
+  .slide-button {
+    border-right: solid !important;
   }
 
   ion-icon[aria-label~="facebook"] {

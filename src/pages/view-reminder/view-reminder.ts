@@ -31,6 +31,10 @@ export class ViewReminder {
 		return Utils.formatDate(this.reminder.datetime);
 	}
 
+	repeatOn() {
+		return this.reminder.repeat != 0 ? this.reminder.repeat : '';
+	}
+
 	confirmDelete() {
 	  let alert = this.alertCtrl.create({
 	    title: 'Confirm',

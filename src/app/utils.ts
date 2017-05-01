@@ -10,10 +10,12 @@ export default class Utils {
     }
 
     static getSocialMediaIcon(type: string[]) {
-      if (type.length > 1) { //multiple types
+      let icon = type[0].toLowerCase();
+
+      if (type.length > 1 || icon == "other") { //multiple types
         return 'star';
       } else {
-        switch(type[0].toLowerCase()) {
+        switch(icon) {
           case 'google+':
             return 'logo-googleplus';
           case 'twitter':

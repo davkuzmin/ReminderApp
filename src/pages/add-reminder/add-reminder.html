@@ -41,20 +41,18 @@
                   </ion-select>
               </ion-item>
               <ion-item>
+                <ion-label>Repeat</ion-label>
+                <ion-select [(ngModel)]="reminder.repeat">
+                  <ion-option value="0">Once</ion-option>
+                  <ion-option value="day">Daily</ion-option>
+                  <ion-option value="week">Weekly</ion-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
                   <ion-label floating>Notes</ion-label>
                   <ion-textarea [(ngModel)]="reminder.notes"></ion-textarea>
               </ion-item>
             </ion-col>
-          </ion-row>
-          <ion-row radio-group class="padding-top">
-            <ion-item>
-              <ion-label>Repeat</ion-label>
-              <ion-select [(ngModel)]="reminder.repeat">
-                <ion-option value="0">Once</ion-option>
-                <ion-option value="day">Daily</ion-option>
-                <ion-option value="week">Weekly</ion-option>
-              </ion-select>
-            </ion-item>
           </ion-row>
         </ion-slide>
         <ion-slide>
