@@ -4,6 +4,7 @@ import { Camera } from '@ionic-native/camera';
 
 import { ToastService } from '../../providers/toast-service';
 import { GuideService } from '../../providers/guide-service';
+import { NotificationService } from '../../providers/notification-service';
 import { UUID } from 'angular2-uuid';
 import Utils from '../../app/utils';
 
@@ -30,6 +31,7 @@ export class AddRockstarPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private guideService: GuideService,
+    private notify: NotificationService,
     private toaster: ToastService,
     private camera: Camera,
     private alertCtrl: AlertController,
@@ -78,6 +80,10 @@ export class AddRockstarPage {
       this.guide.authorId = this.user.uid;
 
       this.guideService.save(this.guide).then(() => {
+        let title = 'New Rockstar Guide!';
+        let body = this.user.displayName + ' has posted a new guide titled ' + this.guide.title;
+
+        this.notify.sendPushNotification(title, body);
         this.navCtrl.pop();
       });
     } else {
