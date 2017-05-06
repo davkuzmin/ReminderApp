@@ -1,1 +1,163 @@
-Hi!
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Rockstar Guide Creator</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+</head>
+
+<body>
+  <div id="login-view" class="col-4">
+    <img src="icon.png" />
+    <h3>Rockstar Guide Creator</h3>
+    <input id="username" type="text" class="form-control" placeholder="Username">
+    <input id="password" type="password" class="form-control" placeholder="Password">
+    <button type="button" class="btn btn-primary login-button" onclick="loginWithEmail()">Login</button>
+    <button type="button" class="btn btn-primary login-button" onclick="loginWithFacebook()">
+      Facebook Login
+    </button>
+  </div>
+
+  <div id="editor-view" class="col-10" style="display: none;">
+    <div class="form-group">
+      <div class="input-group">
+        <span class="input-group-addon">Title</span>
+        <input id="title" type="text" class="form-control">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div for="jumbo-checkbox" class="dropdown-item" href="#">
+              <input id="jumbo-checkbox" type="checkbox">
+              Notify rockstars when new guide is posted</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <textarea></textarea>
+    </div>
+
+    <div class="form-group">
+      <button type="button" class="btn btn-primary float-right" onclick="submitGuide()">Post</button>
+    </div>
+  </div>
+
+  <div id="success-view" class="col-6" style="display: none;">
+    <img src="checkmark.png" />
+    <h3>Rockstar Guide Posted!</h3>
+    <a href="javascript: showEditor()" style="display: block;">Post more guides</a>
+    <a href="javascript: logout()" style="display: block;">Logout</a>
+  </div>
+
+  <link rel="stylesheet" href="styles.css">
+  <script src="utils.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=p427p3hzpo5ochbx3w20on66iu0en0kbvy68pol7edfj66dy"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+  <script defer type="text/javascript">
+    firebase.initializeApp({
+      apiKey: "AIzaSyDjrD83IP68C1KxkKOdrUoX7MYCReD1Snk",
+      authDomain: "reminderapp-bb5a7.firebaseapp.com",
+      databaseURL: "https://reminderapp-bb5a7.firebaseio.com",
+      projectId: "reminderapp-bb5a7",
+      storageBucket: "reminderapp-bb5a7.appspot.com",
+      messagingSenderId: "554293570088"
+    });
+    tinymce.init({
+      selector:'textarea',
+      width: '100%',
+      height: '50vh',
+      plugins: 'media',
+    });
+
+    var currentUser = null;
+
+    function loginWithEmail() {
+      let username = document.getElementById('username').value;
+      let password = document.getElementById('password').value;
+
+      return firebase.auth().signInWithEmailAndPassword(username, password).then(user => {
+        return firebase.database().ref('users/' + user.uid).once('value').then((snap) => {
+          currentUser = user;
+          showEditor();
+        });
+      }).catch(e => {
+        toastr.error(e.message, 'Uh Oh!');
+      });
+    }
+
+    function loginWithFacebook() {
+      let provider = new firebase.auth.FacebookAuthProvider();
+      provider.setCustomParameters({
+        'display': 'popup'
+      });
+
+      return firebase.auth().signInWithPopup(provider).then(result => {
+        showEditor();
+      }).catch(function(e) {
+        toastr.error(e.message, 'Uh Oh!');
+      });
+    }
+
+    function logout() {
+      firebase.auth().signOut().then(res => {
+        showLogin();
+      });
+    }
+
+    function showLogin(user) {
+      $('#login-view').show();
+      $('#success-view').hide();
+      $('#editor-view').hide();
+    }
+
+    function showEditor(user) {
+      $('#login-view').hide();
+      $('#success-view').hide();
+      $('#editor-view').show();
+    }
+
+    function showSuccess(user) {
+      $('#login-view').hide();
+      $('#success-view').show();
+      $('#editor-view').hide();
+    }
+
+    function clearEditor() {
+      document.getElementById('title').value = "";
+      tinymce.activeEditor.setContent('');
+    }
+
+    function submitGuide() {
+      var guide = {
+        id: '1234',
+        authorId: currentUser.uid,
+        createdOn: new Date().toISOString(),
+        title: document.getElementById('title').value,
+        content: tinymce.activeEditor.getContent(),
+      };
+
+      firebase.database().ref('guides/' + guide.id).set(guide).then(res => {
+        clearEditor();
+        showSuccess();
+      }).catch(e => {
+        toastr.error(e.message, 'Uh Oh!');
+      });
+    }
+
+  </script>
+</body>
+</html>

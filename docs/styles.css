@@ -1,0 +1,46 @@
+.login-button {
+  margin-top: 10px;
+  width: 100%;
+}
+
+#login-view {
+  margin: auto;
+  text-align: center;
+  margin-top: 15vh;
+}
+
+#editor-view {
+  margin: auto;
+  text-align: center;
+  padding-top: 20px;
+}
+
+#success-view {
+  margin: auto;
+  text-align: center;
+  margin-top: 15vh;
+}
+
+#success-view > h3 {
+  padding-top: 30%;
+  color: grey;
+}
+
+#guide-editor {
+  width: 100% !important;
+}
+
+#notifyCheckbox {
+  width: 25px;
+  height: 25px;
+}
+
+.vertical-center {
+  vertical-align: center;
+}
+
+#jumbo-checkbox {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
