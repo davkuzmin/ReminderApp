@@ -15,9 +15,6 @@
     <input id="username" type="text" class="form-control" placeholder="Username">
     <input id="password" type="password" class="form-control" placeholder="Password">
     <button type="button" class="btn btn-primary login-button" onclick="loginWithEmail()">Login</button>
-    <button type="button" class="btn btn-primary login-button" onclick="loginWithFacebook()">
-      Facebook Login
-    </button>
   </div>
 
   <div id="editor-view" class="col-10" style="display: none;">
@@ -25,18 +22,7 @@
       <div class="input-group">
         <span class="input-group-addon">Title</span>
         <input id="title" type="text" class="form-control">
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-cog" aria-hidden="true"></i>
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <div for="jumbo-checkbox" class="dropdown-item" href="#">
-              <input id="jumbo-checkbox" type="checkbox">
-              Notify rockstars when new guide is posted</div>
-          </div>
-        </div>
       </div>
-
     </div>
 
     <div class="form-group">
@@ -99,19 +85,6 @@
       });
     }
 
-    function loginWithFacebook() {
-      let provider = new firebase.auth.FacebookAuthProvider();
-      provider.setCustomParameters({
-        'display': 'popup'
-      });
-
-      return firebase.auth().signInWithPopup(provider).then(result => {
-        showEditor();
-      }).catch(function(e) {
-        toastr.error(e.message, 'Uh Oh!');
-      });
-    }
-
     function logout() {
       firebase.auth().signOut().then(res => {
         showLogin();
@@ -143,7 +116,7 @@
 
     function submitGuide() {
       var guide = {
-        id: '1234',
+        id: guid(),
         authorId: currentUser.uid,
         createdOn: new Date().toISOString(),
         title: document.getElementById('title').value,
@@ -157,7 +130,6 @@
         toastr.error(e.message, 'Uh Oh!');
       });
     }
-
   </script>
 </body>
 </html>
